@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -266,6 +267,35 @@ namespace TCPClient
                 comboBox_codec.Enabled = !IsConnected;
                 btn_disconnect.Enabled = IsConnected;
             }));
+        }
+
+        private void btn_openCurrDir_MouseEnter(object sender, EventArgs e)
+        {
+            this.Invoke((Action)(() =>
+            {
+                btn_openCurrDir.Image = Properties.Resources._4_folder_DarkColor;
+            }));
+        }
+
+        private void btn_openCurrDir_MouseLeave(object sender, EventArgs e)
+        {
+            this.Invoke((Action)(() =>
+            {
+                btn_openCurrDir.Image = Properties.Resources._4_folder;
+            }));
+        }
+
+        private void btn_openCurrDir_Click(object sender, EventArgs e)
+        {
+            var currentDirectory = Environment.CurrentDirectory;
+            try
+            {
+                Process.Start("explorer.exe", currentDirectory);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"无法打开文件资源管理器：\n\t{ex.Message}\n调用堆栈：\n\t{ex.StackTrace}", ex.GetType().Name, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -309,6 +310,35 @@ namespace TCPServer
         {
             //消息编辑栏显示当前所选择的快捷消息的消息内容
             this.Invoke(new Action(() => { richTextBox_msgEditBox.Text = quickMsgs[comboBox_quickMsg.SelectedIndex].Message; }));
+        }
+
+        private void btn_openCurrDir_MouseEnter(object sender, EventArgs e)
+        {
+            this.Invoke((Action)(() =>
+            {
+                btn_openCurrDir.Image = Properties.Resources._4_folder_DarkColor;
+            }));
+        }
+
+        private void btn_openCurrDir_MouseLeave(object sender, EventArgs e)
+        {
+            this.Invoke((Action)(() =>
+            {
+                btn_openCurrDir.Image = Properties.Resources._4_folder;
+            }));
+        }
+
+        private void btn_openCurrDir_Click(object sender, EventArgs e)
+        {
+            var currentDirectory = Environment.CurrentDirectory;
+            try
+            {
+                Process.Start("explorer.exe", currentDirectory);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show($"无法打开文件资源管理器：\n\t{ex.Message}\n调用堆栈：\n\t{ex.StackTrace}", ex.GetType().Name, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
