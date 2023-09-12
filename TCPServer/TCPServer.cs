@@ -23,6 +23,8 @@ namespace TCPServer
 {
     public partial class TCPServer : Form
     {
+        internal static bool s_scrollToCaret = false;           //消息栏是否总是定位到最新一行
+        internal static bool s_clearEditBoxAfterSend = true;    //发送消息后是否清空编辑栏
         string hostIPStr = "127.0.0.1";
         IPAddress hostIP;
         int hostProt;
@@ -258,10 +260,10 @@ namespace TCPServer
                     if (value.Socket.Send(buffer) == buffer.Length)
                         PrintMsg($"向客户端[{value.Socket.RemoteEndPoint}]发送消息：{msg}");
                 }
-                this.Invoke(new Action(() =>
+                if (s_clearEditBoxAfterSend)
                 {
-                    richTextBox_msgEditBox.Clear();
-                }));
+                    this.Invoke(new Action(() => { richTextBox_msgEditBox.Clear(); }));
+                }
             }
             catch (Exception ex)
             {
@@ -339,6 +341,22 @@ namespace TCPServer
             {
                 MessageBox.Show($"无法打开文件资源管理器：\n\t{ex.Message}\n调用堆栈：\n\t{ex.StackTrace}", ex.GetType().Name, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void tsmi_scrollToCaret_CheckedChanged(object sender, EventArgs e)
+        {
+            s_scrollToCaret = tsmi_scrollToCaret.Checked;
+        }
+
+        private void tsmi_clearEditBoxAfterSend_CheckedChanged(object sender, EventArgs e)
+        {
+            s_clearEditBoxAfterSend = tsmi_clearEditBoxAfterSend.Checked;
+        }
+
+        private void richTextBox_msgBox_TextChanged(object sender, EventArgs e)
+        {
+            if(s_scrollToCaret)
+                richTextBox_msgBox.ScrollToCaret();
         }
     }
 }

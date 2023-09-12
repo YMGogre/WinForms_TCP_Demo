@@ -42,6 +42,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.comboBox_quickMsg = new System.Windows.Forms.ComboBox();
             this.btn_addQuickMsg = new System.Windows.Forms.Label();
+            this.btn_openCurrDir = new System.Windows.Forms.Label();
             this.toolTip_addQuickMsg = new System.Windows.Forms.ToolTip(this.components);
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.richTextBox_msgEditBox = new System.Windows.Forms.RichTextBox();
@@ -51,13 +52,17 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.richTextBox_msgBox = new System.Windows.Forms.RichTextBox();
-            this.btn_openCurrDir = new System.Windows.Forms.Label();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmi_scrollToCaret = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmi_clearEditBoxAfterSend = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -86,7 +91,7 @@
             "原数据直接编码(UTF-8)",
             "增加 4 字节包头(UTF-8)"});
             this.comboBox_codec.Location = new System.Drawing.Point(99, 152);
-            this.comboBox_codec.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBox_codec.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox_codec.Name = "comboBox_codec";
             this.comboBox_codec.Size = new System.Drawing.Size(153, 29);
             this.comboBox_codec.TabIndex = 9;
@@ -176,7 +181,7 @@
             this.groupBox2.Controls.Add(this.btn_openCurrDir);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.groupBox2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.groupBox2.Location = new System.Drawing.Point(0, 440);
+            this.groupBox2.Location = new System.Drawing.Point(0, 453);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(261, 58);
             this.groupBox2.TabIndex = 6;
@@ -188,7 +193,7 @@
             this.comboBox_quickMsg.Dock = System.Windows.Forms.DockStyle.Fill;
             this.comboBox_quickMsg.FormattingEnabled = true;
             this.comboBox_quickMsg.Location = new System.Drawing.Point(3, 25);
-            this.comboBox_quickMsg.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBox_quickMsg.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox_quickMsg.Name = "comboBox_quickMsg";
             this.comboBox_quickMsg.Size = new System.Drawing.Size(195, 29);
             this.comboBox_quickMsg.TabIndex = 1;
@@ -207,13 +212,26 @@
             this.btn_addQuickMsg.MouseEnter += new System.EventHandler(this.btn_addQuickMsg_MouseEnter);
             this.btn_addQuickMsg.MouseLeave += new System.EventHandler(this.btn_addQuickMsg_MouseLeave);
             // 
+            // btn_openCurrDir
+            // 
+            this.btn_openCurrDir.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btn_openCurrDir.Image = global::TCPClient.Properties.Resources._4_folder;
+            this.btn_openCurrDir.Location = new System.Drawing.Point(228, 25);
+            this.btn_openCurrDir.Name = "btn_openCurrDir";
+            this.btn_openCurrDir.Size = new System.Drawing.Size(30, 30);
+            this.btn_openCurrDir.TabIndex = 2;
+            this.toolTip_addQuickMsg.SetToolTip(this.btn_openCurrDir, "浏览当前工作目录");
+            this.btn_openCurrDir.Click += new System.EventHandler(this.btn_openCurrDir_Click);
+            this.btn_openCurrDir.MouseEnter += new System.EventHandler(this.btn_openCurrDir_MouseEnter);
+            this.btn_openCurrDir.MouseLeave += new System.EventHandler(this.btn_openCurrDir_MouseLeave);
+            // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.richTextBox_msgEditBox);
             this.groupBox3.Controls.Add(this.tableLayoutPanel1);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.groupBox3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.groupBox3.Location = new System.Drawing.Point(0, 398);
+            this.groupBox3.Location = new System.Drawing.Point(0, 436);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(667, 100);
             this.groupBox3.TabIndex = 10;
@@ -271,10 +289,10 @@
             this.panel1.Controls.Add(this.groupBox1);
             this.panel1.Controls.Add(this.groupBox2);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel1.Location = new System.Drawing.Point(667, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Location = new System.Drawing.Point(667, 25);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(261, 498);
+            this.panel1.Size = new System.Drawing.Size(261, 511);
             this.panel1.TabIndex = 11;
             // 
             // groupBox4
@@ -282,9 +300,9 @@
             this.groupBox4.Controls.Add(this.richTextBox_msgBox);
             this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.groupBox4.Location = new System.Drawing.Point(0, 0);
+            this.groupBox4.Location = new System.Drawing.Point(0, 25);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(667, 398);
+            this.groupBox4.Size = new System.Drawing.Size(667, 411);
             this.groupBox4.TabIndex = 12;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "消息栏";
@@ -295,33 +313,60 @@
             this.richTextBox_msgBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.richTextBox_msgBox.Location = new System.Drawing.Point(3, 25);
             this.richTextBox_msgBox.Name = "richTextBox_msgBox";
-            this.richTextBox_msgBox.Size = new System.Drawing.Size(661, 370);
+            this.richTextBox_msgBox.Size = new System.Drawing.Size(661, 383);
             this.richTextBox_msgBox.TabIndex = 1;
             this.richTextBox_msgBox.Text = "";
+            this.richTextBox_msgBox.TextChanged += new System.EventHandler(this.richTextBox_msgBox_TextChanged);
             // 
-            // btn_openCurrDir
+            // menuStrip1
             // 
-            this.btn_openCurrDir.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btn_openCurrDir.Image = global::TCPClient.Properties.Resources._4_folder;
-            this.btn_openCurrDir.Location = new System.Drawing.Point(228, 25);
-            this.btn_openCurrDir.Name = "btn_openCurrDir";
-            this.btn_openCurrDir.Size = new System.Drawing.Size(30, 30);
-            this.btn_openCurrDir.TabIndex = 2;
-            this.toolTip_addQuickMsg.SetToolTip(this.btn_openCurrDir, "浏览当前工作目录");
-            this.btn_openCurrDir.Click += new System.EventHandler(this.btn_openCurrDir_Click);
-            this.btn_openCurrDir.MouseEnter += new System.EventHandler(this.btn_openCurrDir_MouseEnter);
-            this.btn_openCurrDir.MouseLeave += new System.EventHandler(this.btn_openCurrDir_MouseLeave);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(928, 25);
+            this.menuStrip1.TabIndex = 13;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmi_scrollToCaret,
+            this.tsmi_clearEditBoxAfterSend});
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(44, 21);
+            this.toolStripMenuItem1.Text = "选项";
+            // 
+            // tsmi_scrollToCaret
+            // 
+            this.tsmi_scrollToCaret.CheckOnClick = true;
+            this.tsmi_scrollToCaret.Name = "tsmi_scrollToCaret";
+            this.tsmi_scrollToCaret.Size = new System.Drawing.Size(220, 22);
+            this.tsmi_scrollToCaret.Text = "消息栏总是定位到最新一行";
+            // 
+            // tsmi_clearEditBoxAfterSend
+            // 
+            this.tsmi_clearEditBoxAfterSend.Checked = true;
+            this.tsmi_clearEditBoxAfterSend.CheckOnClick = true;
+            this.tsmi_clearEditBoxAfterSend.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.tsmi_clearEditBoxAfterSend.Name = "tsmi_clearEditBoxAfterSend";
+            this.tsmi_clearEditBoxAfterSend.Size = new System.Drawing.Size(220, 22);
+            this.tsmi_clearEditBoxAfterSend.Text = "发送消息后清空编辑栏";
             // 
             // TCPClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(928, 498);
+            this.ClientSize = new System.Drawing.Size(928, 536);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.KeyPreview = true;
+            this.MainMenuStrip = this.menuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "TCPClient";
             this.Text = "TCP 客户端";
             this.Load += new System.EventHandler(this.TCPClient_Load);
@@ -332,7 +377,10 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -360,6 +408,10 @@
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.RichTextBox richTextBox_msgBox;
         private System.Windows.Forms.Label btn_openCurrDir;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem tsmi_scrollToCaret;
+        private System.Windows.Forms.ToolStripMenuItem tsmi_clearEditBoxAfterSend;
     }
 }
 

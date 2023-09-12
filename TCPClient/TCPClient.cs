@@ -240,10 +240,10 @@ namespace TCPClient
                 var buffer = DataProcessing.EncodeUsingSpecificCodecPattern(msg, Codec);
                 if (_clientSocket.Send(buffer) == buffer.Length)
                     PrintMsg($"向服务端[{_clientSocket.RemoteEndPoint}]发送消息：{msg}");
-                this.Invoke(new Action(() =>
+                if (tsmi_clearEditBoxAfterSend.Checked)
                 {
-                    richTextBox_msgEditBox.Clear();
-                }));
+                    this.Invoke(new Action(() => { richTextBox_msgEditBox.Clear(); }));
+                }
             }
             catch (Exception ex)
             {
@@ -296,6 +296,12 @@ namespace TCPClient
             {
                 MessageBox.Show($"无法打开文件资源管理器：\n\t{ex.Message}\n调用堆栈：\n\t{ex.StackTrace}", ex.GetType().Name, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void richTextBox_msgBox_TextChanged(object sender, EventArgs e)
+        {
+            if(tsmi_scrollToCaret.Checked)
+                richTextBox_msgBox.ScrollToCaret();        
         }
     }
 }

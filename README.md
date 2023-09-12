@@ -44,3 +44,4 @@
 2. ✅ 服务端广播发送消息：<br><div align="center"><img src="./images/9-BroadcastSend.gif" alt="BroadcastSend"/></div>
 3. ✅ 添加快捷消息：<br><div align="center"><img src="./images/10-AddQuickMsg.gif" alt="AddQuickMsg"/></div>
 4. ✅ 发送快捷消息：<br><div align="center"><img src="./images/11-SendQuickMsg.gif" alt="SendQuickMsg"/></div>
+5. ✅ 部分选项设置可根据自身习惯进行配置（Release [v 0.1.2](https://github.com/YMGogre/WinForms_TCP_Demo/releases/tag/0.1.2) 及以上）：<br><div align="center"><img src="./images/12-option.png" alt="Option"/></div>

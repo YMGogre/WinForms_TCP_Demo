@@ -83,10 +83,10 @@ namespace TCPServer
                 var buffer = DataProcessing.EncodeUsingSpecificCodecPattern(msg, _clientStruct.Codec);
                 if (_clientStruct.Socket.Send(buffer) == buffer.Length)
                     PrintMsg($"向客户端[{_clientStruct.Socket.RemoteEndPoint}]发送消息：{msg}");
-                this.Invoke(new Action(() =>
+                if (TCPServer.s_clearEditBoxAfterSend)
                 {
-                    richTextBox_msgEditBox.Clear();
-                }));
+                    this.Invoke(new Action(() => { richTextBox_msgEditBox.Clear(); }));
+                }
             }
             catch (Exception ex)
             {
@@ -115,6 +115,12 @@ namespace TCPServer
                 label_clientIP.Text = ((IPEndPoint)_clientStruct.Socket.RemoteEndPoint).Address.ToString();
                 label_clientPort.Text = ((IPEndPoint)_clientStruct.Socket.RemoteEndPoint).Port.ToString();
             }));
+        }
+
+        private void richTextBox_msgBox_TextChanged(object sender, EventArgs e)
+        {
+            if (TCPServer.s_scrollToCaret)
+                richTextBox_msgBox.ScrollToCaret();
         }
     }
 }
