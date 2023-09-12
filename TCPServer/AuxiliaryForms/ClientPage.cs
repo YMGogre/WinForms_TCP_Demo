@@ -122,5 +122,10 @@ namespace TCPServer
             if (TCPServer.s_scrollToCaret)
                 richTextBox_msgBox.ScrollToCaret();
         }
+
+        private void btn_clearMsg_Click(object sender, EventArgs e)
+        {
+            this.Invoke(new Action(() => { richTextBox_msgBox.Clear(); }));
+        }
     }
 }

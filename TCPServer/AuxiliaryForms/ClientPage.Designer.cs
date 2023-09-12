@@ -166,6 +166,7 @@
             this.btn_clearMsg.TabIndex = 1;
             this.btn_clearMsg.Text = "清空消息栏";
             this.btn_clearMsg.UseVisualStyleBackColor = true;
+            this.btn_clearMsg.Click += new System.EventHandler(this.btn_clearMsg_Click);
             // 
             // splitContainer
             // 
@@ -189,7 +190,7 @@
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(2);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -216,9 +217,9 @@
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox3.Location = new System.Drawing.Point(0, 0);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox3.Size = new System.Drawing.Size(251, 358);
             this.groupBox3.TabIndex = 7;
             this.groupBox3.TabStop = false;
@@ -305,7 +306,7 @@
             this.comboBox_quickMsg.Dock = System.Windows.Forms.DockStyle.Fill;
             this.comboBox_quickMsg.FormattingEnabled = true;
             this.comboBox_quickMsg.Location = new System.Drawing.Point(3, 25);
-            this.comboBox_quickMsg.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBox_quickMsg.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox_quickMsg.Name = "comboBox_quickMsg";
             this.comboBox_quickMsg.Size = new System.Drawing.Size(245, 29);
             this.comboBox_quickMsg.TabIndex = 1;
