@@ -60,6 +60,7 @@
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmi_scrollToCaret = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmi_clearEditBoxAfterSend = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmi_saveServerConfig = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControl.SuspendLayout();
@@ -390,7 +391,8 @@
             // 
             this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmi_scrollToCaret,
-            this.tsmi_clearEditBoxAfterSend});
+            this.tsmi_clearEditBoxAfterSend,
+            this.tsmi_saveServerConfig});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.ShortcutKeyDisplayString = "";
             this.toolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
@@ -415,6 +417,16 @@
             this.tsmi_clearEditBoxAfterSend.Text = "发送消息后清空编辑栏";
             this.tsmi_clearEditBoxAfterSend.CheckedChanged += new System.EventHandler(this.tsmi_clearEditBoxAfterSend_CheckedChanged);
             // 
+            // tsmi_saveServerConfig
+            // 
+            this.tsmi_saveServerConfig.Checked = true;
+            this.tsmi_saveServerConfig.CheckOnClick = true;
+            this.tsmi_saveServerConfig.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.tsmi_saveServerConfig.Name = "tsmi_saveServerConfig";
+            this.tsmi_saveServerConfig.Size = new System.Drawing.Size(220, 22);
+            this.tsmi_saveServerConfig.Text = "保存服务端配置";
+            this.tsmi_saveServerConfig.ToolTipText = "在应用程序关闭时保存服务端 IP 地址和端口号";
+            // 
             // TCPServer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -427,6 +439,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "TCPServer";
             this.Text = "TCP 服务端";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TCPServer_FormClosing);
             this.Load += new System.EventHandler(this.TCPServer_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -482,6 +495,7 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem tsmi_scrollToCaret;
         private System.Windows.Forms.ToolStripMenuItem tsmi_clearEditBoxAfterSend;
+        private System.Windows.Forms.ToolStripMenuItem tsmi_saveServerConfig;
     }
 }
 

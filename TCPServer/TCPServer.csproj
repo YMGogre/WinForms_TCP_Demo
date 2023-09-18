@@ -26,7 +26,7 @@
     <SupportUrl>https://github.com/YMGogre/WinForms_TCP_Demo</SupportUrl>
     <ProductName>TCPServer</ProductName>
     <PublisherName>xjy</PublisherName>
-    <ApplicationRevision>3</ApplicationRevision>
+    <ApplicationRevision>4</ApplicationRevision>
     <ApplicationVersion>0.1.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>

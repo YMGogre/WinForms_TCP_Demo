@@ -126,6 +126,14 @@ namespace TCPClient
                     comboBox_quickMsg.Items.Add(quickMsgs.Last().Name);
                 }
             }
+            tsmi_scrollToCaret.Checked = Properties.Settings.Default.scrollToCaret;
+            tsmi_clearEditBoxAfterSend.Checked = Properties.Settings.Default.clearEditBoxAfterSend;
+            tsmi_saveServerConfig.Checked = Properties.Settings.Default.saveServerConfig;
+            if (tsmi_saveServerConfig.Checked)
+            {
+                maskedTextBox_hostIP.Text = Properties.Settings.Default.hostIP;
+                maskedTextBox_hostPort.Text = Properties.Settings.Default.hostPort;
+            }
         }
 
         private void maskedTextBox_hostIP_Validating(object sender, CancelEventArgs e)
@@ -303,5 +311,26 @@ namespace TCPClient
             if(tsmi_scrollToCaret.Checked)
                 richTextBox_msgBox.ScrollToCaret();        
         }
+
+        private void TCPClient_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Properties.Settings.Default.scrollToCaret = tsmi_scrollToCaret.Checked;
+            Properties.Settings.Default.clearEditBoxAfterSend = tsmi_clearEditBoxAfterSend.Checked;
+            Properties.Settings.Default.saveServerConfig = tsmi_saveServerConfig.Checked;
+            Properties.Settings.Default.hostIP = maskedTextBox_hostIP.Text;
+            Properties.Settings.Default.hostPort = maskedTextBox_hostPort.Text;
+            Properties.Settings.Default.Save();
+        }
     }
 }
+
+/**
+ * 参考链接：
+ *      <https://stackoverflow.com/questions/36059076/send-packet-from-server-to-a-specific-client-using-tcp-c-sharp>
+ *      ListBox 项改变时触发事件方法：<https://stackoverflow.com/questions/7860467/events-for-adding-removing-items-in-a-listbox-c-net>
+ *      MSDN Socket 参考：<https://learn.microsoft.com/zh-cn/dotnet/api/system.net.sockets?view=net-8.0>
+ *      IP 地址输入控件的 TextBox 实现：<https://stackoverflow.com/questions/60765586/three-dots-in-textbox?noredirect=1&lq=1>
+ *      IP 地址输入控件的 MaskedTextBox 实现：<https://stackoverflow.com/questions/7924000/ip-address-in-a-maskedtextbox>
+ *      IP 地址输入控件的三方实现：<https://stackoverflow.com/questions/884857/need-a-net-winforms-ip-address-control>
+ *      管理应用程序设置 (.NET)：<https://learn.microsoft.com/zh-cn/visualstudio/ide/managing-application-settings-dotnet?view=vs-2022>
+ */
