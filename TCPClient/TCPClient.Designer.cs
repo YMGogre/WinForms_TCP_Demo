@@ -87,6 +87,7 @@
             // 
             // comboBox_codec
             // 
+            this.comboBox_codec.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_codec.FormattingEnabled = true;
             this.comboBox_codec.Items.AddRange(new object[] {
             "原数据直接编码(UTF-8)",
@@ -192,6 +193,7 @@
             // comboBox_quickMsg
             // 
             this.comboBox_quickMsg.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBox_quickMsg.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_quickMsg.FormattingEnabled = true;
             this.comboBox_quickMsg.Location = new System.Drawing.Point(3, 25);
             this.comboBox_quickMsg.Margin = new System.Windows.Forms.Padding(2);
