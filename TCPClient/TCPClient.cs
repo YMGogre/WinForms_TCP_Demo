@@ -133,13 +133,21 @@ namespace TCPClient
             {
                 maskedTextBox_hostIP.Text = Properties.Settings.Default.hostIP;
                 maskedTextBox_hostPort.Text = Properties.Settings.Default.hostPort;
+                hostIPStr = Properties.Settings.Default.hostIP.Replace(" ", "");
+                hostIP = System.Net.IPAddress.Parse(hostIPStr);
+                hostProt = int.Parse(Properties.Settings.Default.hostPort);
             }
         }
 
         private void maskedTextBox_hostIP_Validating(object sender, CancelEventArgs e)
         {
             hostIPStr = maskedTextBox_hostIP.Text.Replace(" ", "");
-            if (!System.Net.IPAddress.TryParse(hostIPStr, out hostIP))
+            if (System.Net.IPAddress.TryParse(hostIPStr, out hostIP))
+            {
+                Properties.Settings.Default.hostIP = maskedTextBox_hostIP.Text;
+                Properties.Settings.Default.Save();
+            }
+            else
             {
                 MessageBox.Show("您需要输入有效的服务端 IP 地址！");
                 maskedTextBox_hostIP.SelectAll();
@@ -149,13 +157,18 @@ namespace TCPClient
 
         private void maskedTextBox_hostPort_Validating(object sender, CancelEventArgs e)
         {
-            if (!int.TryParse(maskedTextBox_hostPort.Text, out int port) || port < 1 || port > 65535)
+            if (int.TryParse(maskedTextBox_hostPort.Text, out int port) && port >= 1 && port <= 65535)
+            {
+                hostProt = port;
+                Properties.Settings.Default.hostPort = maskedTextBox_hostPort.Text;
+                Properties.Settings.Default.Save();
+            }
+            else
             {
                 MessageBox.Show("端口号必须在 1~65535 之间！");
                 maskedTextBox_hostPort.SelectAll();
                 e.Cancel = true;
             }
-            else hostProt = port;
         }
 
         private void btn_connect_Click(object sender, EventArgs e)
@@ -317,8 +330,6 @@ namespace TCPClient
             Properties.Settings.Default.scrollToCaret = tsmi_scrollToCaret.Checked;
             Properties.Settings.Default.clearEditBoxAfterSend = tsmi_clearEditBoxAfterSend.Checked;
             Properties.Settings.Default.saveServerConfig = tsmi_saveServerConfig.Checked;
-            Properties.Settings.Default.hostIP = maskedTextBox_hostIP.Text;
-            Properties.Settings.Default.hostPort = maskedTextBox_hostPort.Text;
             Properties.Settings.Default.Save();
         }
     }

@@ -178,24 +178,37 @@ namespace TCPServer
             {
                 maskedTextBox_hostIP.Text = Properties.Settings.Default.hostIP;
                 maskedTextBox_hostPort.Text = Properties.Settings.Default.hostPort;
+                hostIPStr = Properties.Settings.Default.hostIP.Replace(" ", "");
+                hostIP = System.Net.IPAddress.Parse(hostIPStr);
+                hostProt = int.Parse(Properties.Settings.Default.hostPort);
             }
         }
 
         private void maskedTextBox_port_Validating(object sender, CancelEventArgs e)
         {
-            if (!int.TryParse(maskedTextBox_hostPort.Text, out int port) || port < 1 || port > 65535)
+            if (int.TryParse(maskedTextBox_hostPort.Text, out int port) && port >= 1 && port <= 65535)
+            {
+                hostProt = port;
+                Properties.Settings.Default.hostPort = maskedTextBox_hostPort.Text;
+                Properties.Settings.Default.Save();
+            }
+            else
             {
                 MessageBox.Show("端口号必须在 1~65535 之间！");
                 maskedTextBox_hostPort.SelectAll();
                 e.Cancel = true;
             }
-            else hostProt = port;
         }
 
         private void maskedTextBox_hostIP_Validating(object sender, CancelEventArgs e)
         {
             hostIPStr =  maskedTextBox_hostIP.Text.Replace(" ","");
-            if (!System.Net.IPAddress.TryParse(hostIPStr, out hostIP))
+            if (System.Net.IPAddress.TryParse(hostIPStr, out hostIP))
+            {
+                Properties.Settings.Default.hostIP = maskedTextBox_hostIP.Text;
+                Properties.Settings.Default.Save();
+            }
+            else
             {
                 MessageBox.Show("您需要输入有效的服务端 IP 地址！");
                 maskedTextBox_hostIP.SelectAll();
@@ -372,8 +385,6 @@ namespace TCPServer
             Properties.Settings.Default.scrollToCaret = tsmi_scrollToCaret.Checked;
             Properties.Settings.Default.clearEditBoxAfterSend = tsmi_clearEditBoxAfterSend.Checked;
             Properties.Settings.Default.saveServerConfig = tsmi_saveServerConfig.Checked;
-            Properties.Settings.Default.hostIP = maskedTextBox_hostIP.Text;
-            Properties.Settings.Default.hostPort = maskedTextBox_hostPort.Text;
             Properties.Settings.Default.Save();
         }
     }
@@ -387,5 +398,6 @@ namespace TCPServer
  *      IP 地址输入控件的 TextBox 实现：<https://stackoverflow.com/questions/60765586/three-dots-in-textbox?noredirect=1&lq=1>
  *      IP 地址输入控件的 MaskedTextBox 实现：<https://stackoverflow.com/questions/7924000/ip-address-in-a-maskedtextbox>
  *      IP 地址输入控件的三方实现：<https://stackoverflow.com/questions/884857/need-a-net-winforms-ip-address-control>
+ *      “设置”页面，项目设计器：<https://learn.microsoft.com/zh-cn/visualstudio/ide/reference/settings-page-project-designer?view=vs-2022&f1url=%3FappId%3DDev16IDEF1%26l%3DZH-CN%26k%3Dk(ApplicationSettingsOverview)%3Bk(TargetFrameworkMoniker-.NETFramework%2CVersion%253Dv4.8)%26rd%3Dtrue>
  *      管理应用程序设置 (.NET)：<https://learn.microsoft.com/zh-cn/visualstudio/ide/managing-application-settings-dotnet?view=vs-2022>
  */

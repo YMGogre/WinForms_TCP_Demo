@@ -9,10 +9,10 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="hostIP" Type="System.String" Scope="User">
-      <Value Profile="(Default)">"127. 0 . 0 . 1 "</Value>
+      <Value Profile="(Default)">127. 0 . 0 . 1 </Value>
     </Setting>
     <Setting Name="hostPort" Type="System.String" Scope="User">
-      <Value Profile="(Default)">"54600"</Value>
+      <Value Profile="(Default)">54600</Value>
     </Setting>
     <Setting Name="saveServerConfig" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
