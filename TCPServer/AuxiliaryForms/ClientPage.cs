@@ -127,5 +127,34 @@ namespace TCPServer
         {
             this.Invoke(new Action(() => { richTextBox_msgBox.Clear(); }));
         }
+
+        private void contextMenuStrip_Opening(object sender, CancelEventArgs e)
+        {
+            RichTextBox richTextBox = contextMenuStrip.SourceControl as RichTextBox;
+            // 右键菜单-剪切：只有在非只读控件具有选定文本时启用
+            ToolStripMenuItem_cut.Enabled = !string.IsNullOrEmpty(richTextBox.SelectedText) && !richTextBox.ReadOnly;
+            // 右键菜单-复制：在控件具有选定文本时启用
+            ToolStripMenuItem_copy.Enabled = !string.IsNullOrEmpty(richTextBox.SelectedText);
+            // 右键菜单-粘贴：在剪贴板中存在文本数据且控件非只读时启用
+            ToolStripMenuItem_paste.Enabled = Clipboard.ContainsText() && !richTextBox.ReadOnly;
+        }
+
+        private void ToolStripMenuItem_cut_Click(object sender, EventArgs e)
+        {
+            RichTextBox richTextBox = contextMenuStrip.SourceControl as RichTextBox;
+            richTextBox.Cut();
+        }
+
+        private void ToolStripMenuItem_copy_Click(object sender, EventArgs e)
+        {
+            RichTextBox richTextBox = contextMenuStrip.SourceControl as RichTextBox;
+            richTextBox.Copy();
+        }
+
+        private void ToolStripMenuItem_paste_Click(object sender, EventArgs e)
+        {
+            RichTextBox richTextBox = contextMenuStrip.SourceControl as RichTextBox;
+            richTextBox.Paste();
+        }
     }
 }

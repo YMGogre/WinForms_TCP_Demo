@@ -37,6 +37,10 @@
             this.richTextBox_logBox = new System.Windows.Forms.RichTextBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.richTextBox_msgBox = new System.Windows.Forms.RichTextBox();
+            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ToolStripMenuItem_cut = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItem_copy = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItem_paste = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.richTextBox_msgEditBox = new System.Windows.Forms.RichTextBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -72,6 +76,7 @@
             splitContainer1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox5.SuspendLayout();
+            this.contextMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(splitContainer2)).BeginInit();
             splitContainer2.Panel1.SuspendLayout();
             splitContainer2.Panel2.SuspendLayout();
@@ -144,14 +149,51 @@
             // 
             // richTextBox_msgBox
             // 
+            this.richTextBox_msgBox.BackColor = System.Drawing.SystemColors.Window;
+            this.richTextBox_msgBox.ContextMenuStrip = this.contextMenuStrip;
             this.richTextBox_msgBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBox_msgBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.richTextBox_msgBox.Location = new System.Drawing.Point(3, 25);
             this.richTextBox_msgBox.Name = "richTextBox_msgBox";
+            this.richTextBox_msgBox.ReadOnly = true;
             this.richTextBox_msgBox.Size = new System.Drawing.Size(442, 341);
             this.richTextBox_msgBox.TabIndex = 1;
             this.richTextBox_msgBox.Text = "";
             this.richTextBox_msgBox.TextChanged += new System.EventHandler(this.richTextBox_msgBox_TextChanged);
+            // 
+            // contextMenuStrip
+            // 
+            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ToolStripMenuItem_cut,
+            this.ToolStripMenuItem_copy,
+            this.ToolStripMenuItem_paste});
+            this.contextMenuStrip.Name = "contextMenuStrip";
+            this.contextMenuStrip.Size = new System.Drawing.Size(101, 70);
+            this.contextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip_Opening);
+            // 
+            // ToolStripMenuItem_cut
+            // 
+            this.ToolStripMenuItem_cut.Enabled = false;
+            this.ToolStripMenuItem_cut.Name = "ToolStripMenuItem_cut";
+            this.ToolStripMenuItem_cut.Size = new System.Drawing.Size(100, 22);
+            this.ToolStripMenuItem_cut.Text = "剪切";
+            this.ToolStripMenuItem_cut.Click += new System.EventHandler(this.ToolStripMenuItem_cut_Click);
+            // 
+            // ToolStripMenuItem_copy
+            // 
+            this.ToolStripMenuItem_copy.Enabled = false;
+            this.ToolStripMenuItem_copy.Name = "ToolStripMenuItem_copy";
+            this.ToolStripMenuItem_copy.Size = new System.Drawing.Size(100, 22);
+            this.ToolStripMenuItem_copy.Text = "复制";
+            this.ToolStripMenuItem_copy.Click += new System.EventHandler(this.ToolStripMenuItem_copy_Click);
+            // 
+            // ToolStripMenuItem_paste
+            // 
+            this.ToolStripMenuItem_paste.Enabled = false;
+            this.ToolStripMenuItem_paste.Name = "ToolStripMenuItem_paste";
+            this.ToolStripMenuItem_paste.Size = new System.Drawing.Size(100, 22);
+            this.ToolStripMenuItem_paste.Text = "粘贴";
+            this.ToolStripMenuItem_paste.Click += new System.EventHandler(this.ToolStripMenuItem_paste_Click);
             // 
             // splitContainer2
             // 
@@ -202,6 +244,7 @@
             // 
             // richTextBox_msgEditBox
             // 
+            this.richTextBox_msgEditBox.ContextMenuStrip = this.contextMenuStrip;
             this.richTextBox_msgEditBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBox_msgEditBox.Location = new System.Drawing.Point(3, 25);
             this.richTextBox_msgEditBox.Name = "richTextBox_msgEditBox";
@@ -495,6 +538,7 @@
             splitContainer1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
+            this.contextMenuStrip.ResumeLayout(false);
             splitContainer2.Panel1.ResumeLayout(false);
             splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(splitContainer2)).EndInit();
@@ -551,6 +595,10 @@
         private System.Windows.Forms.ToolStripMenuItem tsmi_clearEditBoxAfterSend;
         private System.Windows.Forms.ToolStripMenuItem tsmi_saveServerConfig;
         private WindowsFormsControlLibraryMadeByXJY.IPAddrInputer ipAddrInputer_hostIP;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_cut;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_copy;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_paste;
     }
 }
 

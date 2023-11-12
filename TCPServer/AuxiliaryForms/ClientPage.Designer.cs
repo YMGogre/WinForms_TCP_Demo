@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.richTextBox_msgBox = new System.Windows.Forms.RichTextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -47,6 +48,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.comboBox_quickMsg = new System.Windows.Forms.ComboBox();
+            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ToolStripMenuItem_cut = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItem_copy = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItem_paste = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer_edit)).BeginInit();
@@ -64,11 +69,13 @@
             this.splitContainer1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox6.SuspendLayout();
+            this.contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // richTextBox_msgBox
             // 
             this.richTextBox_msgBox.BackColor = System.Drawing.SystemColors.Window;
+            this.richTextBox_msgBox.ContextMenuStrip = this.contextMenuStrip;
             this.richTextBox_msgBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBox_msgBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.richTextBox_msgBox.Location = new System.Drawing.Point(3, 25);
@@ -123,6 +130,7 @@
             // 
             // richTextBox_msgEditBox
             // 
+            this.richTextBox_msgEditBox.ContextMenuStrip = this.contextMenuStrip;
             this.richTextBox_msgEditBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBox_msgEditBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.richTextBox_msgEditBox.Location = new System.Drawing.Point(0, 0);
@@ -313,6 +321,40 @@
             this.comboBox_quickMsg.TabIndex = 1;
             this.comboBox_quickMsg.SelectionChangeCommitted += new System.EventHandler(this.comboBox_quickMsg_SelectionChangeCommitted);
             // 
+            // contextMenuStrip
+            // 
+            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ToolStripMenuItem_cut,
+            this.ToolStripMenuItem_copy,
+            this.ToolStripMenuItem_paste});
+            this.contextMenuStrip.Name = "contextMenuStrip";
+            this.contextMenuStrip.Size = new System.Drawing.Size(181, 92);
+            this.contextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip_Opening);
+            // 
+            // ToolStripMenuItem_cut
+            // 
+            this.ToolStripMenuItem_cut.Enabled = false;
+            this.ToolStripMenuItem_cut.Name = "ToolStripMenuItem_cut";
+            this.ToolStripMenuItem_cut.Size = new System.Drawing.Size(180, 22);
+            this.ToolStripMenuItem_cut.Text = "剪切";
+            this.ToolStripMenuItem_cut.Click += new System.EventHandler(this.ToolStripMenuItem_cut_Click);
+            // 
+            // ToolStripMenuItem_copy
+            // 
+            this.ToolStripMenuItem_copy.Enabled = false;
+            this.ToolStripMenuItem_copy.Name = "ToolStripMenuItem_copy";
+            this.ToolStripMenuItem_copy.Size = new System.Drawing.Size(180, 22);
+            this.ToolStripMenuItem_copy.Text = "复制";
+            this.ToolStripMenuItem_copy.Click += new System.EventHandler(this.ToolStripMenuItem_copy_Click);
+            // 
+            // ToolStripMenuItem_paste
+            // 
+            this.ToolStripMenuItem_paste.Enabled = false;
+            this.ToolStripMenuItem_paste.Name = "ToolStripMenuItem_paste";
+            this.ToolStripMenuItem_paste.Size = new System.Drawing.Size(180, 22);
+            this.ToolStripMenuItem_paste.Text = "粘贴";
+            this.ToolStripMenuItem_paste.Click += new System.EventHandler(this.ToolStripMenuItem_paste_Click);
+            // 
             // ClientPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -341,6 +383,7 @@
             this.splitContainer1.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
+            this.contextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -366,5 +409,9 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label_clientName;
         private System.Windows.Forms.Label label_clientPort;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_cut;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_copy;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_paste;
     }
 }

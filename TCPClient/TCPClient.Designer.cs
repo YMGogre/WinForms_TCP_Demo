@@ -47,6 +47,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.maskedTextBox_hostPort = new System.Windows.Forms.MaskedTextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.ipAddrInputer_hostIP = new WindowsFormsControlLibraryMadeByXJY.IPAddrInputer();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btn_connect = new System.Windows.Forms.Button();
             this.btn_disconnect = new System.Windows.Forms.Button();
@@ -60,7 +61,10 @@
             this.tsmi_scrollToCaret = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmi_clearEditBoxAfterSend = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmi_saveServerConfig = new System.Windows.Forms.ToolStripMenuItem();
-            this.ipAddrInputer_hostIP = new WindowsFormsControlLibraryMadeByXJY.IPAddrInputer();
+            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ToolStripMenuItem_cut = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItem_copy = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItem_paste = new System.Windows.Forms.ToolStripMenuItem();
             splitContainer1 = new System.Windows.Forms.SplitContainer();
             splitContainer2 = new System.Windows.Forms.SplitContainer();
             ((System.ComponentModel.ISupportInitialize)(splitContainer1)).BeginInit();
@@ -80,6 +84,7 @@
             this.panel2.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -131,10 +136,13 @@
             // 
             // richTextBox_msgBox
             // 
+            this.richTextBox_msgBox.BackColor = System.Drawing.SystemColors.Window;
+            this.richTextBox_msgBox.ContextMenuStrip = this.contextMenuStrip;
             this.richTextBox_msgBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBox_msgBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.richTextBox_msgBox.Location = new System.Drawing.Point(3, 25);
             this.richTextBox_msgBox.Name = "richTextBox_msgBox";
+            this.richTextBox_msgBox.ReadOnly = true;
             this.richTextBox_msgBox.Size = new System.Drawing.Size(659, 351);
             this.richTextBox_msgBox.TabIndex = 1;
             this.richTextBox_msgBox.Text = "";
@@ -155,6 +163,7 @@
             // 
             // richTextBox_msgEditBox
             // 
+            this.richTextBox_msgEditBox.ContextMenuStrip = this.contextMenuStrip;
             this.richTextBox_msgEditBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBox_msgEditBox.Location = new System.Drawing.Point(3, 25);
             this.richTextBox_msgEditBox.Name = "richTextBox_msgEditBox";
@@ -307,6 +316,20 @@
             this.label3.Text = "编解码器：";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // ipAddrInputer_hostIP
+            // 
+            this.ipAddrInputer_hostIP.BackColor = System.Drawing.SystemColors.Window;
+            this.ipAddrInputer_hostIP.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ipAddrInputer_hostIP.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ipAddrInputer_hostIP.EnableLoopbackAddr = true;
+            this.ipAddrInputer_hostIP.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ipAddrInputer_hostIP.Location = new System.Drawing.Point(99, 3);
+            this.ipAddrInputer_hostIP.Margin = new System.Windows.Forms.Padding(3, 3, 3, 4);
+            this.ipAddrInputer_hostIP.Name = "ipAddrInputer_hostIP";
+            this.ipAddrInputer_hostIP.Size = new System.Drawing.Size(151, 31);
+            this.ipAddrInputer_hostIP.TabIndex = 0;
+            this.ipAddrInputer_hostIP.Validating += new System.ComponentModel.CancelEventHandler(this.ipAddrInputer_hostIP_Validating);
+            // 
             // panel2
             // 
             this.panel2.Controls.Add(this.btn_connect);
@@ -438,19 +461,39 @@
             this.tsmi_saveServerConfig.Text = "保存服务端配置";
             this.tsmi_saveServerConfig.ToolTipText = "在应用程序关闭时保存服务端 IP 地址和端口号";
             // 
-            // ipAddrInputer_hostIP
+            // contextMenuStrip
             // 
-            this.ipAddrInputer_hostIP.BackColor = System.Drawing.SystemColors.Window;
-            this.ipAddrInputer_hostIP.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ipAddrInputer_hostIP.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ipAddrInputer_hostIP.EnableLoopbackAddr = true;
-            this.ipAddrInputer_hostIP.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ipAddrInputer_hostIP.Location = new System.Drawing.Point(99, 3);
-            this.ipAddrInputer_hostIP.Margin = new System.Windows.Forms.Padding(3, 3, 3, 4);
-            this.ipAddrInputer_hostIP.Name = "ipAddrInputer_hostIP";
-            this.ipAddrInputer_hostIP.Size = new System.Drawing.Size(151, 31);
-            this.ipAddrInputer_hostIP.TabIndex = 0;
-            this.ipAddrInputer_hostIP.Validating += new System.ComponentModel.CancelEventHandler(this.ipAddrInputer_hostIP_Validating);
+            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ToolStripMenuItem_cut,
+            this.ToolStripMenuItem_copy,
+            this.ToolStripMenuItem_paste});
+            this.contextMenuStrip.Name = "contextMenuStrip";
+            this.contextMenuStrip.Size = new System.Drawing.Size(101, 70);
+            this.contextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip_Opening);
+            // 
+            // ToolStripMenuItem_cut
+            // 
+            this.ToolStripMenuItem_cut.Enabled = false;
+            this.ToolStripMenuItem_cut.Name = "ToolStripMenuItem_cut";
+            this.ToolStripMenuItem_cut.Size = new System.Drawing.Size(100, 22);
+            this.ToolStripMenuItem_cut.Text = "剪切";
+            this.ToolStripMenuItem_cut.Click += new System.EventHandler(this.ToolStripMenuItem_cut_Click);
+            // 
+            // ToolStripMenuItem_copy
+            // 
+            this.ToolStripMenuItem_copy.Enabled = false;
+            this.ToolStripMenuItem_copy.Name = "ToolStripMenuItem_copy";
+            this.ToolStripMenuItem_copy.Size = new System.Drawing.Size(100, 22);
+            this.ToolStripMenuItem_copy.Text = "复制";
+            this.ToolStripMenuItem_copy.Click += new System.EventHandler(this.ToolStripMenuItem_copy_Click);
+            // 
+            // ToolStripMenuItem_paste
+            // 
+            this.ToolStripMenuItem_paste.Enabled = false;
+            this.ToolStripMenuItem_paste.Name = "ToolStripMenuItem_paste";
+            this.ToolStripMenuItem_paste.Size = new System.Drawing.Size(100, 22);
+            this.ToolStripMenuItem_paste.Text = "粘贴";
+            this.ToolStripMenuItem_paste.Click += new System.EventHandler(this.ToolStripMenuItem_paste_Click);
             // 
             // TCPClient
             // 
@@ -486,6 +529,7 @@
             this.groupBox2.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.contextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -522,6 +566,10 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private WindowsFormsControlLibraryMadeByXJY.IPAddrInputer ipAddrInputer_hostIP;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_cut;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_copy;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_paste;
     }
 }
 
