@@ -33,17 +33,8 @@
             System.Windows.Forms.SplitContainer splitContainer2;
             System.Windows.Forms.SplitContainer splitContainer3;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TCPServer));
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btn_startListen = new System.Windows.Forms.Button();
-            this.maskedTextBox_hostPort = new System.Windows.Forms.MaskedTextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.maskedTextBox_hostIP = new System.Windows.Forms.MaskedTextBox();
-            this.richTextBox_logBox = new System.Windows.Forms.RichTextBox();
-            this.listBox_clients = new System.Windows.Forms.ListBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.tabControl = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.richTextBox_logBox = new System.Windows.Forms.RichTextBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.richTextBox_msgBox = new System.Windows.Forms.RichTextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
@@ -53,10 +44,19 @@
             this.btn_clearMsg = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.listBox_clients = new System.Windows.Forms.ListBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.comboBox_quickMsg = new System.Windows.Forms.ComboBox();
             this.btn_addQuickMsg = new System.Windows.Forms.Label();
             this.btn_openCurrDir = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.ipAddrInputer_hostIP = new WindowsFormsControlLibraryMadeByXJY.IPAddrInputer();
+            this.btn_startListen = new System.Windows.Forms.Button();
+            this.maskedTextBox_hostPort = new System.Windows.Forms.MaskedTextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.tabControl = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
             this.toolTip_addQuickMsg = new System.Windows.Forms.ToolTip(this.components);
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -66,21 +66,12 @@
             splitContainer1 = new System.Windows.Forms.SplitContainer();
             splitContainer2 = new System.Windows.Forms.SplitContainer();
             splitContainer3 = new System.Windows.Forms.SplitContainer();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.tabControl.SuspendLayout();
-            this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(splitContainer1)).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
             splitContainer1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.groupBox5.SuspendLayout();
-            this.groupBox4.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
-            this.panel1.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            this.groupBox6.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(splitContainer2)).BeginInit();
             splitContainer2.Panel1.SuspendLayout();
             splitContainer2.Panel2.SuspendLayout();
@@ -89,133 +80,16 @@
             splitContainer3.Panel1.SuspendLayout();
             splitContainer3.Panel2.SuspendLayout();
             splitContainer3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.groupBox6.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.tabControl.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.btn_startListen);
-            this.groupBox1.Controls.Add(this.maskedTextBox_hostPort);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.maskedTextBox_hostIP);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.groupBox1.Location = new System.Drawing.Point(0, 0);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(264, 169);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "服务端配置";
-            // 
-            // btn_startListen
-            // 
-            this.btn_startListen.Location = new System.Drawing.Point(99, 40);
-            this.btn_startListen.Name = "btn_startListen";
-            this.btn_startListen.Size = new System.Drawing.Size(93, 31);
-            this.btn_startListen.TabIndex = 6;
-            this.btn_startListen.Text = "开始监听";
-            this.btn_startListen.UseVisualStyleBackColor = true;
-            this.btn_startListen.Click += new System.EventHandler(this.btn_startListen_Click);
-            // 
-            // maskedTextBox_hostPort
-            // 
-            this.maskedTextBox_hostPort.Location = new System.Drawing.Point(99, 112);
-            this.maskedTextBox_hostPort.Mask = "00000";
-            this.maskedTextBox_hostPort.Name = "maskedTextBox_hostPort";
-            this.maskedTextBox_hostPort.PromptChar = ' ';
-            this.maskedTextBox_hostPort.Size = new System.Drawing.Size(153, 29);
-            this.maskedTextBox_hostPort.TabIndex = 3;
-            this.maskedTextBox_hostPort.Text = "54600";
-            this.maskedTextBox_hostPort.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.maskedTextBox_hostPort.Validating += new System.ComponentModel.CancelEventHandler(this.maskedTextBox_port_Validating);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(15, 115);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(74, 21);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "端口号：";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(11, 80);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(78, 21);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "IP 地址：";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // maskedTextBox_hostIP
-            // 
-            this.maskedTextBox_hostIP.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.maskedTextBox_hostIP.Location = new System.Drawing.Point(99, 77);
-            this.maskedTextBox_hostIP.Mask = "990.990.990.990";
-            this.maskedTextBox_hostIP.Name = "maskedTextBox_hostIP";
-            this.maskedTextBox_hostIP.PromptChar = ' ';
-            this.maskedTextBox_hostIP.Size = new System.Drawing.Size(153, 29);
-            this.maskedTextBox_hostIP.TabIndex = 0;
-            this.maskedTextBox_hostIP.Text = "127 0  0  1";
-            this.maskedTextBox_hostIP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.maskedTextBox_hostIP.Validating += new System.ComponentModel.CancelEventHandler(this.maskedTextBox_hostIP_Validating);
-            // 
-            // richTextBox_logBox
-            // 
-            this.richTextBox_logBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBox_logBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.richTextBox_logBox.Location = new System.Drawing.Point(3, 25);
-            this.richTextBox_logBox.Name = "richTextBox_logBox";
-            this.richTextBox_logBox.Size = new System.Drawing.Size(217, 341);
-            this.richTextBox_logBox.TabIndex = 1;
-            this.richTextBox_logBox.Text = "";
-            // 
-            // listBox_clients
-            // 
-            this.listBox_clients.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listBox_clients.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.listBox_clients.FormattingEnabled = true;
-            this.listBox_clients.ItemHeight = 17;
-            this.listBox_clients.Location = new System.Drawing.Point(3, 25);
-            this.listBox_clients.Name = "listBox_clients";
-            this.listBox_clients.Size = new System.Drawing.Size(258, 222);
-            this.listBox_clients.TabIndex = 2;
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.richTextBox_logBox);
-            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.groupBox2.Location = new System.Drawing.Point(0, 0);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(223, 369);
-            this.groupBox2.TabIndex = 3;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "日志栏";
-            // 
-            // tabControl
-            // 
-            this.tabControl.Controls.Add(this.tabPage1);
-            this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tabControl.Location = new System.Drawing.Point(0, 25);
-            this.tabControl.Name = "tabControl";
-            this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(957, 517);
-            this.tabControl.TabIndex = 4;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Controls.Add(splitContainer2);
-            this.tabPage1.Location = new System.Drawing.Point(4, 30);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(949, 483);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "首页";
-            this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // splitContainer1
             // 
@@ -233,6 +107,28 @@
             splitContainer1.Size = new System.Drawing.Size(675, 369);
             splitContainer1.SplitterDistance = 223;
             splitContainer1.TabIndex = 8;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.richTextBox_logBox);
+            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.groupBox2.Location = new System.Drawing.Point(0, 0);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(223, 369);
+            this.groupBox2.TabIndex = 3;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "日志栏";
+            // 
+            // richTextBox_logBox
+            // 
+            this.richTextBox_logBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBox_logBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.richTextBox_logBox.Location = new System.Drawing.Point(3, 25);
+            this.richTextBox_logBox.Name = "richTextBox_logBox";
+            this.richTextBox_logBox.Size = new System.Drawing.Size(217, 341);
+            this.richTextBox_logBox.TabIndex = 1;
+            this.richTextBox_logBox.Text = "";
             // 
             // groupBox5
             // 
@@ -256,6 +152,41 @@
             this.richTextBox_msgBox.TabIndex = 1;
             this.richTextBox_msgBox.Text = "";
             this.richTextBox_msgBox.TextChanged += new System.EventHandler(this.richTextBox_msgBox_TextChanged);
+            // 
+            // splitContainer2
+            // 
+            splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            splitContainer2.Location = new System.Drawing.Point(3, 3);
+            splitContainer2.Name = "splitContainer2";
+            // 
+            // splitContainer2.Panel1
+            // 
+            splitContainer2.Panel1.Controls.Add(splitContainer3);
+            // 
+            // splitContainer2.Panel2
+            // 
+            splitContainer2.Panel2.Controls.Add(this.panel1);
+            splitContainer2.Size = new System.Drawing.Size(943, 477);
+            splitContainer2.SplitterDistance = 675;
+            splitContainer2.TabIndex = 10;
+            // 
+            // splitContainer3
+            // 
+            splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
+            splitContainer3.Location = new System.Drawing.Point(0, 0);
+            splitContainer3.Name = "splitContainer3";
+            splitContainer3.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer3.Panel1
+            // 
+            splitContainer3.Panel1.Controls.Add(splitContainer1);
+            // 
+            // splitContainer3.Panel2
+            // 
+            splitContainer3.Panel2.Controls.Add(this.groupBox4);
+            splitContainer3.Size = new System.Drawing.Size(675, 477);
+            splitContainer3.SplitterDistance = 369;
+            splitContainer3.TabIndex = 0;
             // 
             // groupBox4
             // 
@@ -337,6 +268,17 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "客户端列表";
             // 
+            // listBox_clients
+            // 
+            this.listBox_clients.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listBox_clients.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.listBox_clients.FormattingEnabled = true;
+            this.listBox_clients.ItemHeight = 17;
+            this.listBox_clients.Location = new System.Drawing.Point(3, 25);
+            this.listBox_clients.Name = "listBox_clients";
+            this.listBox_clients.Size = new System.Drawing.Size(258, 222);
+            this.listBox_clients.TabIndex = 2;
+            // 
             // groupBox6
             // 
             this.groupBox6.BackColor = System.Drawing.Color.Transparent;
@@ -389,6 +331,100 @@
             this.btn_openCurrDir.MouseEnter += new System.EventHandler(this.btn_openCurrDir_MouseEnter);
             this.btn_openCurrDir.MouseLeave += new System.EventHandler(this.btn_openCurrDir_MouseLeave);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.ipAddrInputer_hostIP);
+            this.groupBox1.Controls.Add(this.btn_startListen);
+            this.groupBox1.Controls.Add(this.maskedTextBox_hostPort);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.groupBox1.Location = new System.Drawing.Point(0, 0);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(264, 169);
+            this.groupBox1.TabIndex = 0;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "服务端配置";
+            // 
+            // ipAddrInputer_hostIP
+            // 
+            this.ipAddrInputer_hostIP.BackColor = System.Drawing.SystemColors.Window;
+            this.ipAddrInputer_hostIP.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ipAddrInputer_hostIP.EnableLoopbackAddr = true;
+            this.ipAddrInputer_hostIP.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ipAddrInputer_hostIP.Location = new System.Drawing.Point(99, 76);
+            this.ipAddrInputer_hostIP.Margin = new System.Windows.Forms.Padding(0);
+            this.ipAddrInputer_hostIP.Name = "ipAddrInputer_hostIP";
+            this.ipAddrInputer_hostIP.Size = new System.Drawing.Size(153, 29);
+            this.ipAddrInputer_hostIP.TabIndex = 7;
+            this.ipAddrInputer_hostIP.Validating += new System.ComponentModel.CancelEventHandler(this.ipAddrInputer_hostIP_Validating);
+            // 
+            // btn_startListen
+            // 
+            this.btn_startListen.Location = new System.Drawing.Point(99, 40);
+            this.btn_startListen.Name = "btn_startListen";
+            this.btn_startListen.Size = new System.Drawing.Size(93, 31);
+            this.btn_startListen.TabIndex = 6;
+            this.btn_startListen.Text = "开始监听";
+            this.btn_startListen.UseVisualStyleBackColor = true;
+            this.btn_startListen.Click += new System.EventHandler(this.btn_startListen_Click);
+            // 
+            // maskedTextBox_hostPort
+            // 
+            this.maskedTextBox_hostPort.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.maskedTextBox_hostPort.Location = new System.Drawing.Point(99, 112);
+            this.maskedTextBox_hostPort.Mask = "00000";
+            this.maskedTextBox_hostPort.Name = "maskedTextBox_hostPort";
+            this.maskedTextBox_hostPort.PromptChar = ' ';
+            this.maskedTextBox_hostPort.Size = new System.Drawing.Size(153, 29);
+            this.maskedTextBox_hostPort.TabIndex = 3;
+            this.maskedTextBox_hostPort.Text = "54600";
+            this.maskedTextBox_hostPort.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.maskedTextBox_hostPort.Validating += new System.ComponentModel.CancelEventHandler(this.maskedTextBox_port_Validating);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(15, 115);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(74, 21);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "端口号：";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(11, 80);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(78, 21);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "IP 地址：";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // tabControl
+            // 
+            this.tabControl.Controls.Add(this.tabPage1);
+            this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tabControl.Location = new System.Drawing.Point(0, 25);
+            this.tabControl.Name = "tabControl";
+            this.tabControl.SelectedIndex = 0;
+            this.tabControl.Size = new System.Drawing.Size(957, 517);
+            this.tabControl.TabIndex = 4;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(splitContainer2);
+            this.tabPage1.Location = new System.Drawing.Point(4, 30);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(949, 483);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "首页";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -439,41 +475,6 @@
             this.tsmi_saveServerConfig.Text = "保存服务端配置";
             this.tsmi_saveServerConfig.ToolTipText = "在应用程序关闭时保存服务端 IP 地址和端口号";
             // 
-            // splitContainer2
-            // 
-            splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
-            splitContainer2.Location = new System.Drawing.Point(3, 3);
-            splitContainer2.Name = "splitContainer2";
-            // 
-            // splitContainer2.Panel1
-            // 
-            splitContainer2.Panel1.Controls.Add(splitContainer3);
-            // 
-            // splitContainer2.Panel2
-            // 
-            splitContainer2.Panel2.Controls.Add(this.panel1);
-            splitContainer2.Size = new System.Drawing.Size(943, 477);
-            splitContainer2.SplitterDistance = 675;
-            splitContainer2.TabIndex = 10;
-            // 
-            // splitContainer3
-            // 
-            splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
-            splitContainer3.Location = new System.Drawing.Point(0, 0);
-            splitContainer3.Name = "splitContainer3";
-            splitContainer3.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer3.Panel1
-            // 
-            splitContainer3.Panel1.Controls.Add(splitContainer1);
-            // 
-            // splitContainer3.Panel2
-            // 
-            splitContainer3.Panel2.Controls.Add(this.groupBox4);
-            splitContainer3.Size = new System.Drawing.Size(675, 477);
-            splitContainer3.SplitterDistance = 369;
-            splitContainer3.TabIndex = 0;
-            // 
             // TCPServer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -488,23 +489,12 @@
             this.Text = "TCP 服务端";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TCPServer_FormClosing);
             this.Load += new System.EventHandler(this.TCPServer_Load);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.tabControl.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(splitContainer1)).EndInit();
             splitContainer1.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
-            this.groupBox4.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox6.ResumeLayout(false);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             splitContainer2.Panel1.ResumeLayout(false);
             splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(splitContainer2)).EndInit();
@@ -513,6 +503,17 @@
             splitContainer3.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(splitContainer3)).EndInit();
             splitContainer3.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.tabControl.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -521,7 +522,6 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.MaskedTextBox maskedTextBox_hostIP;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.MaskedTextBox maskedTextBox_hostPort;
@@ -550,6 +550,7 @@
         private System.Windows.Forms.ToolStripMenuItem tsmi_scrollToCaret;
         private System.Windows.Forms.ToolStripMenuItem tsmi_clearEditBoxAfterSend;
         private System.Windows.Forms.ToolStripMenuItem tsmi_saveServerConfig;
+        private WindowsFormsControlLibraryMadeByXJY.IPAddrInputer ipAddrInputer_hostIP;
     }
 }
 

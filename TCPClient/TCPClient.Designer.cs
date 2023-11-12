@@ -42,7 +42,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.maskedTextBox_hostIP = new System.Windows.Forms.MaskedTextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox_codec = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -61,6 +60,7 @@
             this.tsmi_scrollToCaret = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmi_clearEditBoxAfterSend = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmi_saveServerConfig = new System.Windows.Forms.ToolStripMenuItem();
+            this.ipAddrInputer_hostIP = new WindowsFormsControlLibraryMadeByXJY.IPAddrInputer();
             splitContainer1 = new System.Windows.Forms.SplitContainer();
             splitContainer2 = new System.Windows.Forms.SplitContainer();
             ((System.ComponentModel.ISupportInitialize)(splitContainer1)).BeginInit();
@@ -228,12 +228,12 @@
             this.tableLayoutPanel2.ColumnCount = 2;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 96F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Controls.Add(this.maskedTextBox_hostIP, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.comboBox_codec, 1, 2);
             this.tableLayoutPanel2.Controls.Add(this.label2, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.maskedTextBox_hostPort, 1, 1);
             this.tableLayoutPanel2.Controls.Add(this.label3, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.ipAddrInputer_hostIP, 1, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 83);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -243,20 +243,6 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(253, 116);
             this.tableLayoutPanel2.TabIndex = 11;
-            // 
-            // maskedTextBox_hostIP
-            // 
-            this.maskedTextBox_hostIP.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.maskedTextBox_hostIP.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.maskedTextBox_hostIP.Location = new System.Drawing.Point(99, 3);
-            this.maskedTextBox_hostIP.Mask = "990.990.990.990";
-            this.maskedTextBox_hostIP.Name = "maskedTextBox_hostIP";
-            this.maskedTextBox_hostIP.PromptChar = ' ';
-            this.maskedTextBox_hostIP.Size = new System.Drawing.Size(151, 29);
-            this.maskedTextBox_hostIP.TabIndex = 0;
-            this.maskedTextBox_hostIP.Text = "127 0  0  1";
-            this.maskedTextBox_hostIP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.maskedTextBox_hostIP.Validating += new System.ComponentModel.CancelEventHandler(this.maskedTextBox_hostIP_Validating);
             // 
             // label1
             // 
@@ -452,6 +438,20 @@
             this.tsmi_saveServerConfig.Text = "保存服务端配置";
             this.tsmi_saveServerConfig.ToolTipText = "在应用程序关闭时保存服务端 IP 地址和端口号";
             // 
+            // ipAddrInputer_hostIP
+            // 
+            this.ipAddrInputer_hostIP.BackColor = System.Drawing.SystemColors.Window;
+            this.ipAddrInputer_hostIP.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ipAddrInputer_hostIP.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ipAddrInputer_hostIP.EnableLoopbackAddr = true;
+            this.ipAddrInputer_hostIP.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ipAddrInputer_hostIP.Location = new System.Drawing.Point(99, 3);
+            this.ipAddrInputer_hostIP.Margin = new System.Windows.Forms.Padding(3, 3, 3, 4);
+            this.ipAddrInputer_hostIP.Name = "ipAddrInputer_hostIP";
+            this.ipAddrInputer_hostIP.Size = new System.Drawing.Size(151, 31);
+            this.ipAddrInputer_hostIP.TabIndex = 0;
+            this.ipAddrInputer_hostIP.Validating += new System.ComponentModel.CancelEventHandler(this.ipAddrInputer_hostIP_Validating);
+            // 
             // TCPClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -498,7 +498,6 @@
         private System.Windows.Forms.MaskedTextBox maskedTextBox_hostPort;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.MaskedTextBox maskedTextBox_hostIP;
         private System.Windows.Forms.Button btn_disconnect;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.ComboBox comboBox_quickMsg;
@@ -522,6 +521,7 @@
         private System.Windows.Forms.ToolStripMenuItem tsmi_saveServerConfig;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private WindowsFormsControlLibraryMadeByXJY.IPAddrInputer ipAddrInputer_hostIP;
     }
 }
 

@@ -158,7 +158,6 @@ namespace TCPServer
 
         private void TCPServer_Load(object sender, EventArgs e)
         {
-            maskedTextBox_hostIP.ValidatingType = typeof(System.Net.IPAddress);
             maskedTextBox_hostPort.ValidatingType = typeof(int);
             hostIP = System.Net.IPAddress.Parse(hostIPStr);
             hostProt = 54600;
@@ -176,7 +175,7 @@ namespace TCPServer
             tsmi_saveServerConfig.Checked = Properties.Settings.Default.saveServerConfig;
             if (tsmi_saveServerConfig.Checked)
             {
-                maskedTextBox_hostIP.Text = Properties.Settings.Default.hostIP;
+                ipAddrInputer_hostIP.SetIPAddrStr(Properties.Settings.Default.hostIP);
                 maskedTextBox_hostPort.Text = Properties.Settings.Default.hostPort;
                 hostIPStr = Properties.Settings.Default.hostIP.Replace(" ", "");
                 hostIP = System.Net.IPAddress.Parse(hostIPStr);
@@ -200,20 +199,11 @@ namespace TCPServer
             }
         }
 
-        private void maskedTextBox_hostIP_Validating(object sender, CancelEventArgs e)
+        private void ipAddrInputer_hostIP_Validating(object sender, CancelEventArgs e)
         {
-            hostIPStr =  maskedTextBox_hostIP.Text.Replace(" ","");
-            if (System.Net.IPAddress.TryParse(hostIPStr, out hostIP))
-            {
-                Properties.Settings.Default.hostIP = maskedTextBox_hostIP.Text;
-                Properties.Settings.Default.Save();
-            }
-            else
-            {
-                MessageBox.Show("您需要输入有效的服务端 IP 地址！");
-                maskedTextBox_hostIP.SelectAll();
-                e.Cancel = true;
-            }
+            hostIPStr = ipAddrInputer_hostIP.IPAddrStr;
+            Properties.Settings.Default.hostIP = hostIPStr;
+            Properties.Settings.Default.Save();
         }
 
         private void btn_startListen_Click(object sender, EventArgs e)
