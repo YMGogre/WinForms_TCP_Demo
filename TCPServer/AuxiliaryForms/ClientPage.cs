@@ -128,15 +128,29 @@ namespace TCPServer
             this.Invoke(new Action(() => { richTextBox_msgBox.Clear(); }));
         }
 
+        #region 右键菜单相关
         private void contextMenuStrip_Opening(object sender, CancelEventArgs e)
         {
             RichTextBox richTextBox = contextMenuStrip.SourceControl as RichTextBox;
+            richTextBox.Focus();
+            // 右键菜单-撤销：只有在非只读控件能够撤销前一操作时启用
+            ToolStripMenuItem_cancel.Enabled = richTextBox.CanUndo && !richTextBox.ReadOnly;
             // 右键菜单-剪切：只有在非只读控件具有选定文本时启用
             ToolStripMenuItem_cut.Enabled = !string.IsNullOrEmpty(richTextBox.SelectedText) && !richTextBox.ReadOnly;
             // 右键菜单-复制：在控件具有选定文本时启用
             ToolStripMenuItem_copy.Enabled = !string.IsNullOrEmpty(richTextBox.SelectedText);
             // 右键菜单-粘贴：在剪贴板中存在文本数据且控件非只读时启用
             ToolStripMenuItem_paste.Enabled = Clipboard.ContainsText() && !richTextBox.ReadOnly;
+            // 右键菜单-删除：只有在非只读控件具有选定文本时启用
+            ToolStripMenuItem_delete.Enabled = !string.IsNullOrEmpty(richTextBox.SelectedText) && !richTextBox.ReadOnly;
+            // 右键菜单-全选：在控件没有全选时启用
+            ToolStripMenuItem_all.Enabled = !richTextBox.SelectionLength.Equals(richTextBox.TextLength);
+        }
+
+        private void ToolStripMenuItem_cancel_Click(object sender, EventArgs e)
+        {
+            RichTextBox richTextBox = contextMenuStrip.SourceControl as RichTextBox;
+            richTextBox.Undo();
         }
 
         private void ToolStripMenuItem_cut_Click(object sender, EventArgs e)
@@ -156,5 +170,18 @@ namespace TCPServer
             RichTextBox richTextBox = contextMenuStrip.SourceControl as RichTextBox;
             richTextBox.Paste();
         }
+
+        private void ToolStripMenuItem_delete_Click(object sender, EventArgs e)
+        {
+            RichTextBox richTextBox = contextMenuStrip.SourceControl as RichTextBox;
+            richTextBox.SelectedText = string.Empty;
+        }
+
+        private void ToolStripMenuItem_all_Click(object sender, EventArgs e)
+        {
+            RichTextBox richTextBox = contextMenuStrip.SourceControl as RichTextBox;
+            richTextBox.SelectAll();
+        }
+        #endregion
     }
 }

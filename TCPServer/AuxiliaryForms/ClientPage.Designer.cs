@@ -30,6 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             this.richTextBox_msgBox = new System.Windows.Forms.RichTextBox();
+            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ToolStripMenuItem_cut = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItem_copy = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItem_paste = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.splitContainer_edit = new System.Windows.Forms.SplitContainer();
@@ -48,10 +52,12 @@
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.comboBox_quickMsg = new System.Windows.Forms.ComboBox();
-            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.ToolStripMenuItem_cut = new System.Windows.Forms.ToolStripMenuItem();
-            this.ToolStripMenuItem_copy = new System.Windows.Forms.ToolStripMenuItem();
-            this.ToolStripMenuItem_paste = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItem_cancel = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.ToolStripMenuItem_delete = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.ToolStripMenuItem_all = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStrip.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer_edit)).BeginInit();
@@ -69,7 +75,6 @@
             this.splitContainer1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox6.SuspendLayout();
-            this.contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // richTextBox_msgBox
@@ -85,6 +90,48 @@
             this.richTextBox_msgBox.TabIndex = 0;
             this.richTextBox_msgBox.Text = "";
             this.richTextBox_msgBox.TextChanged += new System.EventHandler(this.richTextBox_msgBox_TextChanged);
+            // 
+            // contextMenuStrip
+            // 
+            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ToolStripMenuItem_cancel,
+            this.toolStripSeparator1,
+            this.ToolStripMenuItem_cut,
+            this.ToolStripMenuItem_copy,
+            this.ToolStripMenuItem_paste,
+            this.ToolStripMenuItem_delete,
+            this.toolStripSeparator2,
+            this.ToolStripMenuItem_all});
+            this.contextMenuStrip.Name = "contextMenuStrip";
+            this.contextMenuStrip.Size = new System.Drawing.Size(181, 170);
+            this.contextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip_Opening);
+            // 
+            // ToolStripMenuItem_cut
+            // 
+            this.ToolStripMenuItem_cut.Enabled = false;
+            this.ToolStripMenuItem_cut.Name = "ToolStripMenuItem_cut";
+            this.ToolStripMenuItem_cut.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
+            this.ToolStripMenuItem_cut.Size = new System.Drawing.Size(180, 22);
+            this.ToolStripMenuItem_cut.Text = "剪切";
+            this.ToolStripMenuItem_cut.Click += new System.EventHandler(this.ToolStripMenuItem_cut_Click);
+            // 
+            // ToolStripMenuItem_copy
+            // 
+            this.ToolStripMenuItem_copy.Enabled = false;
+            this.ToolStripMenuItem_copy.Name = "ToolStripMenuItem_copy";
+            this.ToolStripMenuItem_copy.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
+            this.ToolStripMenuItem_copy.Size = new System.Drawing.Size(180, 22);
+            this.ToolStripMenuItem_copy.Text = "复制";
+            this.ToolStripMenuItem_copy.Click += new System.EventHandler(this.ToolStripMenuItem_copy_Click);
+            // 
+            // ToolStripMenuItem_paste
+            // 
+            this.ToolStripMenuItem_paste.Enabled = false;
+            this.ToolStripMenuItem_paste.Name = "ToolStripMenuItem_paste";
+            this.ToolStripMenuItem_paste.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
+            this.ToolStripMenuItem_paste.Size = new System.Drawing.Size(180, 22);
+            this.ToolStripMenuItem_paste.Text = "粘贴";
+            this.ToolStripMenuItem_paste.Click += new System.EventHandler(this.ToolStripMenuItem_paste_Click);
             // 
             // groupBox1
             // 
@@ -321,39 +368,42 @@
             this.comboBox_quickMsg.TabIndex = 1;
             this.comboBox_quickMsg.SelectionChangeCommitted += new System.EventHandler(this.comboBox_quickMsg_SelectionChangeCommitted);
             // 
-            // contextMenuStrip
+            // ToolStripMenuItem_cancel
             // 
-            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ToolStripMenuItem_cut,
-            this.ToolStripMenuItem_copy,
-            this.ToolStripMenuItem_paste});
-            this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.Size = new System.Drawing.Size(181, 92);
-            this.contextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip_Opening);
+            this.ToolStripMenuItem_cancel.Enabled = false;
+            this.ToolStripMenuItem_cancel.Name = "ToolStripMenuItem_cancel";
+            this.ToolStripMenuItem_cancel.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
+            this.ToolStripMenuItem_cancel.Size = new System.Drawing.Size(180, 22);
+            this.ToolStripMenuItem_cancel.Text = "撤销";
+            this.ToolStripMenuItem_cancel.Click += new System.EventHandler(this.ToolStripMenuItem_cancel_Click);
             // 
-            // ToolStripMenuItem_cut
+            // toolStripSeparator1
             // 
-            this.ToolStripMenuItem_cut.Enabled = false;
-            this.ToolStripMenuItem_cut.Name = "ToolStripMenuItem_cut";
-            this.ToolStripMenuItem_cut.Size = new System.Drawing.Size(180, 22);
-            this.ToolStripMenuItem_cut.Text = "剪切";
-            this.ToolStripMenuItem_cut.Click += new System.EventHandler(this.ToolStripMenuItem_cut_Click);
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
             // 
-            // ToolStripMenuItem_copy
+            // ToolStripMenuItem_delete
             // 
-            this.ToolStripMenuItem_copy.Enabled = false;
-            this.ToolStripMenuItem_copy.Name = "ToolStripMenuItem_copy";
-            this.ToolStripMenuItem_copy.Size = new System.Drawing.Size(180, 22);
-            this.ToolStripMenuItem_copy.Text = "复制";
-            this.ToolStripMenuItem_copy.Click += new System.EventHandler(this.ToolStripMenuItem_copy_Click);
+            this.ToolStripMenuItem_delete.Enabled = false;
+            this.ToolStripMenuItem_delete.Name = "ToolStripMenuItem_delete";
+            this.ToolStripMenuItem_delete.ShortcutKeys = System.Windows.Forms.Keys.Delete;
+            this.ToolStripMenuItem_delete.Size = new System.Drawing.Size(180, 22);
+            this.ToolStripMenuItem_delete.Text = "删除";
+            this.ToolStripMenuItem_delete.Click += new System.EventHandler(this.ToolStripMenuItem_delete_Click);
             // 
-            // ToolStripMenuItem_paste
+            // toolStripSeparator2
             // 
-            this.ToolStripMenuItem_paste.Enabled = false;
-            this.ToolStripMenuItem_paste.Name = "ToolStripMenuItem_paste";
-            this.ToolStripMenuItem_paste.Size = new System.Drawing.Size(180, 22);
-            this.ToolStripMenuItem_paste.Text = "粘贴";
-            this.ToolStripMenuItem_paste.Click += new System.EventHandler(this.ToolStripMenuItem_paste_Click);
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
+            // 
+            // ToolStripMenuItem_all
+            // 
+            this.ToolStripMenuItem_all.Enabled = false;
+            this.ToolStripMenuItem_all.Name = "ToolStripMenuItem_all";
+            this.ToolStripMenuItem_all.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
+            this.ToolStripMenuItem_all.Size = new System.Drawing.Size(180, 22);
+            this.ToolStripMenuItem_all.Text = "全选";
+            this.ToolStripMenuItem_all.Click += new System.EventHandler(this.ToolStripMenuItem_all_Click);
             // 
             // ClientPage
             // 
@@ -366,6 +416,7 @@
             this.Name = "ClientPage";
             this.Text = "ClientPage";
             this.Load += new System.EventHandler(this.ClientPage_Load);
+            this.contextMenuStrip.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.splitContainer_edit.Panel1.ResumeLayout(false);
@@ -383,7 +434,6 @@
             this.splitContainer1.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
-            this.contextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -413,5 +463,10 @@
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_cut;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_copy;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_paste;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_cancel;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_delete;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_all;
     }
 }
