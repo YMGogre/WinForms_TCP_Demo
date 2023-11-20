@@ -399,38 +399,52 @@ namespace TCPServer
 
         private void ToolStripMenuItem_cancel_Click(object sender, EventArgs e)
         {
-            RichTextBox richTextBox = contextMenuStrip.SourceControl as RichTextBox;
+            RichTextBox richTextBox = GetRealActiveControl() as RichTextBox;
             richTextBox.Undo();
         }
 
         private void ToolStripMenuItem_cut_Click(object sender, EventArgs e)
         {
-            RichTextBox richTextBox = contextMenuStrip.SourceControl as RichTextBox;
+            RichTextBox richTextBox = GetRealActiveControl() as RichTextBox;
             richTextBox.Cut();
         }
 
         private void ToolStripMenuItem_copy_Click(object sender, EventArgs e)
         {
-            RichTextBox richTextBox = contextMenuStrip.SourceControl as RichTextBox;
+            RichTextBox richTextBox = GetRealActiveControl() as RichTextBox;
             richTextBox.Copy();
         }
 
         private void ToolStripMenuItem_paste_Click(object sender, EventArgs e)
         {
-            RichTextBox richTextBox = contextMenuStrip.SourceControl as RichTextBox;
+            RichTextBox richTextBox = GetRealActiveControl() as RichTextBox;
             richTextBox.Paste();
         }
 
         private void ToolStripMenuItem_delete_Click(object sender, EventArgs e)
         {
-            RichTextBox richTextBox = contextMenuStrip.SourceControl as RichTextBox;
+            RichTextBox richTextBox = GetRealActiveControl() as RichTextBox;
             richTextBox.SelectedText = string.Empty;
         }
 
         private void ToolStripMenuItem_all_Click(object sender, EventArgs e)
         {
-            RichTextBox richTextBox = contextMenuStrip.SourceControl as RichTextBox;
+            RichTextBox richTextBox = GetRealActiveControl() as RichTextBox;
             richTextBox.SelectAll();
+        }
+
+        /// <summary>
+        /// 获取真正的活动控件
+        /// </summary>
+        /// <returns><see cref="ContainerControl"/> 的当前活动 <see cref="Control"/></returns>
+        private Control GetRealActiveControl()
+        {
+            var activeControl = this.ActiveControl;
+            while(activeControl is ContainerControl)
+            {
+                activeControl = ((ContainerControl)activeControl).ActiveControl;
+            }
+            return activeControl;
         }
         #endregion
     }
