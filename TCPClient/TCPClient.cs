@@ -24,6 +24,7 @@ namespace TCPClient
         IPAddress hostIP;
         int hostProt;
         private Socket _clientSocket;
+        private string timedMsg = string.Empty;
         /// <summary>
         /// 接收消息的线程
         /// </summary>
@@ -103,11 +104,14 @@ namespace TCPClient
             catch (ThreadAbortException) { return; }
             catch (Exception ex)
             {
-                MessageBox.Show($"在从服务端接收消息的过程中出现异常：\n\t{ex.Message}\n调用堆栈：\n\t{ex.StackTrace}", ex.GetType().Name, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                btn_sendMsg.Text = "发    送";
+                transmissionTimer.Stop();
+                timedMsg = string.Empty;
                 //出现其他任何异常情况时，都直接关闭连接
                 _clientSocket.Shutdown(SocketShutdown.Both);
                 _clientSocket.Close();
-               IsConnected = false;
+                IsConnected = false;
+                MessageBox.Show($"在从服务端接收消息的过程中出现异常：\n\t{ex.Message}\n调用堆栈：\n\t{ex.StackTrace}", ex.GetType().Name, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -170,6 +174,9 @@ namespace TCPClient
         {
             try
             {
+                btn_sendMsg.Text = "发    送";
+                transmissionTimer.Stop();
+                timedMsg = string.Empty;
                 _clientSocket.Shutdown(SocketShutdown.Both);
                 _clientSocket.Close();
                 _receiveThread.Abort();
@@ -244,21 +251,33 @@ namespace TCPClient
 
         private void btn_sendMsg_Click(object sender, EventArgs e)
         {
-            try
+            // 如果当前未连接直接退出
+            if (!IsConnected) return;
+            // 定时开始发送
+            if (chkBox_TimedContinuousTransmission.Checked && !transmissionTimer.Enabled)
+            {
+                timedMsg = richTextBox_msgEditBox.Text;
+                if (!timedMsg.Any())
+                {
+                    MessageBox.Show("请确保编辑栏包含任何有效信息。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+                btn_sendMsg.Text = "停    止";
+                transmissionTimer.Start();
+            }
+            // 定时结束发送
+            else if (chkBox_TimedContinuousTransmission.Checked && transmissionTimer.Enabled)
+            {
+                btn_sendMsg.Text = "发    送";
+                transmissionTimer.Stop();
+                timedMsg = string.Empty;
+            }
+            // 普通单次发送
+            else if (!chkBox_TimedContinuousTransmission.Checked)
             {
                 var msg = richTextBox_msgEditBox.Text;
-                if (!msg.Any() || !IsConnected) return;
-                var buffer = DataProcessing.EncodeUsingSpecificCodecPattern(msg, Codec);
-                if (_clientSocket.Send(buffer) == buffer.Length)
-                    PrintMsg($"向服务端[{_clientSocket.RemoteEndPoint}]发送消息：{msg}");
-                if (tsmi_clearEditBoxAfterSend.Checked)
-                {
-                    this.Invoke(new Action(() => { richTextBox_msgEditBox.Clear(); }));
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"在向服务端发送消息的过程中出现异常：\n\t{ex.Message}\n调用堆栈：\n\t{ex.StackTrace}", ex.GetType().Name, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (!msg.Any()) return;
+                SendMsg(msg);
             }
         }
 
@@ -392,6 +411,53 @@ namespace TCPClient
             return activeControl;
         }
         #endregion
+
+        private void chkBox_TimedContinuousTransmission_CheckedChanged(object sender, EventArgs e)
+        {
+            panel3.Visible = chkBox_TimedContinuousTransmission.Checked;
+            if (!chkBox_TimedContinuousTransmission.Checked)
+            {
+                btn_sendMsg.Text = "发    送";
+                transmissionTimer.Stop();
+                timedMsg = string.Empty;
+            }
+        }
+
+        private void timerInterval_ValueChanged(object sender, EventArgs e)
+        {
+            transmissionTimer.Interval = (int)timerInterval.Value;
+        }
+
+        private void transmissionTimer_Tick(object sender, EventArgs e)
+        {
+            if (!timedMsg.Any()) return;
+            SendMsg(timedMsg);
+        }
+
+        /// <summary>
+        /// 向客户端发送消息
+        /// </summary>
+        /// <param name="msg">要发送的消息</param>
+        private void SendMsg(string msg)
+        {
+            try
+            {
+                var buffer = DataProcessing.EncodeUsingSpecificCodecPattern(msg, Codec);
+                if (_clientSocket.Send(buffer) == buffer.Length)
+                    PrintMsg($"向服务端[{_clientSocket.RemoteEndPoint}]发送消息：{msg}");
+                if (tsmi_clearEditBoxAfterSend.Checked)
+                {
+                    this.Invoke(new Action(() => { richTextBox_msgEditBox.Clear(); }));
+                }
+            }
+            catch (Exception ex)
+            {
+                btn_sendMsg.Text = "发    送";
+                transmissionTimer.Stop();
+                timedMsg = string.Empty;
+                MessageBox.Show($"在向服务端发送消息的过程中出现异常：\n\t{ex.Message}\n调用堆栈：\n\t{ex.StackTrace}", ex.GetType().Name, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }
 

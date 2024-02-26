@@ -17,6 +17,7 @@ namespace TCPServer
     public partial class ClientPage : Form
     {
         private readonly ClientStruct _clientStruct;
+        private string timedMsg = string.Empty;
         public ClientStruct ClientStruct { get { return _clientStruct; } }
         public ClientPage(ClientStruct clientStruct)
         {
@@ -45,12 +46,14 @@ namespace TCPServer
                     //当客户端主动断开连接时，还会发送一个长度为 0 的消息，我们可以依据此判断客户端已主动断开连接
                     else
                     {
+                        StopTimer();
                         return;
                     }
                 }
             }
             catch (Exception ex)
             {
+                StopTimer();
                 MessageBox.Show($"在从客户端[{_clientStruct.Socket.RemoteEndPoint}]接收消息的过程中出现异常：\n\t{ex.Message}\n调用堆栈：\n\t{ex.StackTrace}", ex.GetType().Name, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -76,21 +79,29 @@ namespace TCPServer
 
         private void btn_sendMsg_Click(object sender, EventArgs e)
         {
-            try
+            // 定时开始发送
+            if (chkBox_TimedContinuousTransmission.Checked && !transmissionTimer.Enabled)
+            {
+                timedMsg = richTextBox_msgEditBox.Text;
+                if (!timedMsg.Any())
+                {
+                    MessageBox.Show("请确保编辑栏包含任何有效信息。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+                btn_sendMsg.Text = "停    止";
+                transmissionTimer.Start();
+            }
+            // 定时结束发送
+            else if (chkBox_TimedContinuousTransmission.Checked && transmissionTimer.Enabled)
+            {
+                StopTimer();
+            }
+            // 普通单次发送
+            else if (!chkBox_TimedContinuousTransmission.Checked)
             {
                 var msg = richTextBox_msgEditBox.Text;
                 if (!msg.Any()) return;
-                var buffer = DataProcessing.EncodeUsingSpecificCodecPattern(msg, _clientStruct.Codec);
-                if (_clientStruct.Socket.Send(buffer) == buffer.Length)
-                    PrintMsg($"向客户端[{_clientStruct.Socket.RemoteEndPoint}]发送消息：{msg}");
-                if (TCPServer.s_clearEditBoxAfterSend)
-                {
-                    this.Invoke(new Action(() => { richTextBox_msgEditBox.Clear(); }));
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"在向客户端[{_clientStruct.Socket.RemoteEndPoint}]发送消息的过程中出现异常：\n\t{ex.Message}\n调用堆栈：\n\t{ex.StackTrace}", ex.GetType().Name, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                SendMsg(msg);
             }
         }
 
@@ -197,5 +208,58 @@ namespace TCPServer
             return activeControl;
         }
         #endregion
+
+        private void chkBox_TimedContinuousTransmission_CheckedChanged(object sender, EventArgs e)
+        {
+            panel1.Visible = chkBox_TimedContinuousTransmission.Checked;
+            if (!chkBox_TimedContinuousTransmission.Checked)
+            {
+                StopTimer();
+            }
+        }
+
+        private void timerInterval_ValueChanged(object sender, EventArgs e)
+        {
+            transmissionTimer.Interval = (int)timerInterval.Value;
+        }
+
+        private void transmissionTimer_Tick(object sender, EventArgs e)
+        {
+            if (!timedMsg.Any()) return;
+            SendMsg(timedMsg);
+        }
+
+        /// <summary>
+        /// 停止定时器并恢复界面，你可以在需要的位置调用该方法以避免非期望状况下定时器仍在运行
+        /// </summary>
+        private void StopTimer()
+        {
+            btn_sendMsg.Text = "发    送";
+            transmissionTimer.Stop();
+            timedMsg = string.Empty;
+        }
+
+        /// <summary>
+        /// 向客户端发送消息
+        /// </summary>
+        /// <param name="msg">要发送的消息</param>
+        private void SendMsg(string msg)
+        {
+            try
+            {
+                var buffer = DataProcessing.EncodeUsingSpecificCodecPattern(msg, _clientStruct.Codec);
+                if (_clientStruct.Socket.Send(buffer) == buffer.Length)
+                    PrintMsg($"向客户端[{_clientStruct.Socket.RemoteEndPoint}]发送消息：{msg}");
+                if (TCPServer.s_clearEditBoxAfterSend)
+                {
+                    this.Invoke(new Action(() => { richTextBox_msgEditBox.Clear(); }));
+                }
+            }
+            catch (Exception ex)
+            {
+                StopTimer();
+                MessageBox.Show($"在向客户端[{_clientStruct.Socket.RemoteEndPoint}]发送消息的过程中出现异常：\n\t{ex.Message}\n调用堆栈：\n\t{ex.StackTrace}", ex.GetType().Name, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

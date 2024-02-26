@@ -28,8 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.Label label4;
             this.richTextBox_msgBox = new System.Windows.Forms.RichTextBox();
-            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip();
+            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ToolStripMenuItem_cancel = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.ToolStripMenuItem_cut = new System.Windows.Forms.ToolStripMenuItem();
@@ -45,6 +47,9 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btn_sendMsg = new System.Windows.Forms.Button();
             this.btn_clearMsg = new System.Windows.Forms.Button();
+            this.chkBox_TimedContinuousTransmission = new System.Windows.Forms.CheckBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.timerInterval = new System.Windows.Forms.NumericUpDown();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -56,6 +61,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.comboBox_quickMsg = new System.Windows.Forms.ComboBox();
+            this.transmissionTimer = new System.Windows.Forms.Timer(this.components);
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            label4 = new System.Windows.Forms.Label();
             this.contextMenuStrip.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -64,6 +72,8 @@
             this.splitContainer_edit.Panel2.SuspendLayout();
             this.splitContainer_edit.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.timerInterval)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
@@ -76,6 +86,17 @@
             this.groupBox6.SuspendLayout();
             this.SuspendLayout();
             // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Dock = System.Windows.Forms.DockStyle.Right;
+            label4.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            label4.Location = new System.Drawing.Point(76, 0);
+            label4.Name = "label4";
+            label4.Size = new System.Drawing.Size(25, 17);
+            label4.TabIndex = 1;
+            label4.Text = "ms";
+            // 
             // richTextBox_msgBox
             // 
             this.richTextBox_msgBox.BackColor = System.Drawing.SystemColors.Window;
@@ -85,7 +106,7 @@
             this.richTextBox_msgBox.Location = new System.Drawing.Point(3, 25);
             this.richTextBox_msgBox.Name = "richTextBox_msgBox";
             this.richTextBox_msgBox.ReadOnly = true;
-            this.richTextBox_msgBox.Size = new System.Drawing.Size(532, 272);
+            this.richTextBox_msgBox.Size = new System.Drawing.Size(595, 272);
             this.richTextBox_msgBox.TabIndex = 0;
             this.richTextBox_msgBox.Text = "";
             this.richTextBox_msgBox.TextChanged += new System.EventHandler(this.richTextBox_msgBox_TextChanged);
@@ -176,7 +197,7 @@
             this.groupBox1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(538, 300);
+            this.groupBox1.Size = new System.Drawing.Size(601, 300);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "消息栏";
@@ -188,7 +209,7 @@
             this.groupBox2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox2.Location = new System.Drawing.Point(0, 0);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(538, 112);
+            this.groupBox2.Size = new System.Drawing.Size(601, 112);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "编辑栏";
@@ -207,8 +228,8 @@
             // splitContainer_edit.Panel2
             // 
             this.splitContainer_edit.Panel2.Controls.Add(this.tableLayoutPanel1);
-            this.splitContainer_edit.Size = new System.Drawing.Size(532, 84);
-            this.splitContainer_edit.SplitterDistance = 392;
+            this.splitContainer_edit.Size = new System.Drawing.Size(595, 84);
+            this.splitContainer_edit.SplitterDistance = 355;
             this.splitContainer_edit.TabIndex = 4;
             // 
             // richTextBox_msgEditBox
@@ -218,31 +239,36 @@
             this.richTextBox_msgEditBox.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.richTextBox_msgEditBox.Location = new System.Drawing.Point(0, 0);
             this.richTextBox_msgEditBox.Name = "richTextBox_msgEditBox";
-            this.richTextBox_msgEditBox.Size = new System.Drawing.Size(392, 84);
+            this.richTextBox_msgEditBox.Size = new System.Drawing.Size(355, 84);
             this.richTextBox_msgEditBox.TabIndex = 2;
             this.richTextBox_msgEditBox.Text = "";
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.ColumnCount = 1;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.AutoSize = true;
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 55F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45F));
             this.tableLayoutPanel1.Controls.Add(this.btn_sendMsg, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.btn_clearMsg, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.chkBox_TimedContinuousTransmission, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.panel1, 1, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(136, 84);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(236, 84);
             this.tableLayoutPanel1.TabIndex = 3;
             // 
             // btn_sendMsg
             // 
+            this.btn_sendMsg.AutoSize = true;
             this.btn_sendMsg.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btn_sendMsg.Location = new System.Drawing.Point(3, 3);
             this.btn_sendMsg.Name = "btn_sendMsg";
-            this.btn_sendMsg.Size = new System.Drawing.Size(130, 36);
+            this.btn_sendMsg.Size = new System.Drawing.Size(123, 36);
             this.btn_sendMsg.TabIndex = 0;
             this.btn_sendMsg.Text = "发    送";
             this.btn_sendMsg.UseVisualStyleBackColor = true;
@@ -253,11 +279,66 @@
             this.btn_clearMsg.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btn_clearMsg.Location = new System.Drawing.Point(3, 45);
             this.btn_clearMsg.Name = "btn_clearMsg";
-            this.btn_clearMsg.Size = new System.Drawing.Size(130, 36);
+            this.btn_clearMsg.Size = new System.Drawing.Size(123, 36);
             this.btn_clearMsg.TabIndex = 1;
             this.btn_clearMsg.Text = "清空消息栏";
             this.btn_clearMsg.UseVisualStyleBackColor = true;
             this.btn_clearMsg.Click += new System.EventHandler(this.btn_clearMsg_Click);
+            // 
+            // chkBox_TimedContinuousTransmission
+            // 
+            this.chkBox_TimedContinuousTransmission.AutoSize = true;
+            this.chkBox_TimedContinuousTransmission.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.chkBox_TimedContinuousTransmission.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.chkBox_TimedContinuousTransmission.Location = new System.Drawing.Point(132, 3);
+            this.chkBox_TimedContinuousTransmission.Name = "chkBox_TimedContinuousTransmission";
+            this.chkBox_TimedContinuousTransmission.Size = new System.Drawing.Size(101, 36);
+            this.chkBox_TimedContinuousTransmission.TabIndex = 2;
+            this.chkBox_TimedContinuousTransmission.Text = "定时连续发送";
+            this.chkBox_TimedContinuousTransmission.UseVisualStyleBackColor = true;
+            this.chkBox_TimedContinuousTransmission.CheckedChanged += new System.EventHandler(this.chkBox_TimedContinuousTransmission_CheckedChanged);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.timerInterval);
+            this.panel1.Controls.Add(label4);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(132, 45);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(101, 36);
+            this.panel1.TabIndex = 3;
+            this.panel1.Visible = false;
+            // 
+            // timerInterval
+            // 
+            this.timerInterval.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.timerInterval.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.timerInterval.Increment = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.timerInterval.Location = new System.Drawing.Point(0, 0);
+            this.timerInterval.Maximum = new decimal(new int[] {
+            120000,
+            0,
+            0,
+            0});
+            this.timerInterval.Minimum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.timerInterval.Name = "timerInterval";
+            this.timerInterval.Size = new System.Drawing.Size(76, 23);
+            this.timerInterval.TabIndex = 0;
+            this.toolTip.SetToolTip(this.timerInterval, "设置定时器间隔，取值范围 50~120000");
+            this.timerInterval.Value = new decimal(new int[] {
+            2000,
+            0,
+            0,
+            0});
+            this.timerInterval.ValueChanged += new System.EventHandler(this.timerInterval_ValueChanged);
             // 
             // splitContainer
             // 
@@ -273,7 +354,7 @@
             // splitContainer.Panel2
             // 
             this.splitContainer.Panel2.Controls.Add(this.groupBox2);
-            this.splitContainer.Size = new System.Drawing.Size(538, 416);
+            this.splitContainer.Size = new System.Drawing.Size(601, 416);
             this.splitContainer.SplitterDistance = 300;
             this.splitContainer.TabIndex = 3;
             // 
@@ -293,7 +374,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.groupBox3);
             this.splitContainer1.Panel2.Controls.Add(this.groupBox6);
             this.splitContainer1.Size = new System.Drawing.Size(792, 416);
-            this.splitContainer1.SplitterDistance = 538;
+            this.splitContainer1.SplitterDistance = 601;
             this.splitContainer1.SplitterWidth = 3;
             this.splitContainer1.TabIndex = 4;
             // 
@@ -311,7 +392,7 @@
             this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox3.Size = new System.Drawing.Size(251, 358);
+            this.groupBox3.Size = new System.Drawing.Size(188, 358);
             this.groupBox3.TabIndex = 7;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "客户端信息";
@@ -322,7 +403,7 @@
             this.label_clientPort.Location = new System.Drawing.Point(2, 184);
             this.label_clientPort.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label_clientPort.Name = "label_clientPort";
-            this.label_clientPort.Size = new System.Drawing.Size(247, 32);
+            this.label_clientPort.Size = new System.Drawing.Size(184, 32);
             this.label_clientPort.TabIndex = 5;
             this.label_clientPort.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -332,7 +413,7 @@
             this.label3.Location = new System.Drawing.Point(2, 152);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(247, 32);
+            this.label3.Size = new System.Drawing.Size(184, 32);
             this.label3.TabIndex = 4;
             this.label3.Text = "客户端端口号";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -343,7 +424,7 @@
             this.label_clientIP.Location = new System.Drawing.Point(2, 120);
             this.label_clientIP.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label_clientIP.Name = "label_clientIP";
-            this.label_clientIP.Size = new System.Drawing.Size(247, 32);
+            this.label_clientIP.Size = new System.Drawing.Size(184, 32);
             this.label_clientIP.TabIndex = 3;
             this.label_clientIP.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -353,7 +434,7 @@
             this.label2.Location = new System.Drawing.Point(2, 88);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(247, 32);
+            this.label2.Size = new System.Drawing.Size(184, 32);
             this.label2.TabIndex = 2;
             this.label2.Text = "客户端 IP";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -364,7 +445,7 @@
             this.label_clientName.Location = new System.Drawing.Point(2, 56);
             this.label_clientName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label_clientName.Name = "label_clientName";
-            this.label_clientName.Size = new System.Drawing.Size(247, 32);
+            this.label_clientName.Size = new System.Drawing.Size(184, 32);
             this.label_clientName.TabIndex = 1;
             this.label_clientName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -374,7 +455,7 @@
             this.label1.Location = new System.Drawing.Point(2, 24);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(247, 32);
+            this.label1.Size = new System.Drawing.Size(184, 32);
             this.label1.TabIndex = 0;
             this.label1.Text = "客户端名称";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -387,7 +468,7 @@
             this.groupBox6.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox6.Location = new System.Drawing.Point(0, 358);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(251, 58);
+            this.groupBox6.Size = new System.Drawing.Size(188, 58);
             this.groupBox6.TabIndex = 6;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "快捷消息";
@@ -400,9 +481,14 @@
             this.comboBox_quickMsg.Location = new System.Drawing.Point(3, 25);
             this.comboBox_quickMsg.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox_quickMsg.Name = "comboBox_quickMsg";
-            this.comboBox_quickMsg.Size = new System.Drawing.Size(245, 29);
+            this.comboBox_quickMsg.Size = new System.Drawing.Size(182, 29);
             this.comboBox_quickMsg.TabIndex = 1;
             this.comboBox_quickMsg.SelectionChangeCommitted += new System.EventHandler(this.comboBox_quickMsg_SelectionChangeCommitted);
+            // 
+            // transmissionTimer
+            // 
+            this.transmissionTimer.Interval = 2000;
+            this.transmissionTimer.Tick += new System.EventHandler(this.transmissionTimer_Tick);
             // 
             // ClientPage
             // 
@@ -420,9 +506,14 @@
             this.groupBox2.ResumeLayout(false);
             this.splitContainer_edit.Panel1.ResumeLayout(false);
             this.splitContainer_edit.Panel2.ResumeLayout(false);
+            this.splitContainer_edit.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer_edit)).EndInit();
             this.splitContainer_edit.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.timerInterval)).EndInit();
             this.splitContainer.Panel1.ResumeLayout(false);
             this.splitContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
@@ -467,5 +558,10 @@
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_delete;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_all;
+        private System.Windows.Forms.CheckBox chkBox_TimedContinuousTransmission;
+        private System.Windows.Forms.NumericUpDown timerInterval;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Timer transmissionTimer;
+        private System.Windows.Forms.ToolTip toolTip;
     }
 }
