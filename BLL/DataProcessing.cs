@@ -30,10 +30,7 @@ namespace BLL
                 case Codec.lengthPacketHeader:
                     try
                     {
-                        var header = new byte[4];
-                        Array.Copy(buffer, header, 4);
                         var length = BitConverter.ToInt32(buffer, 0);
-                        if (length < 0 || length > 65534) throw new ArgumentOutOfRangeException(nameof(buffer), "包头所表征的包体字节数长度值无效（长度为负数或者超过接收缓冲区的最大长度）");
                         var data = new byte[length];
                         if (length == validLength - 4)
                         {

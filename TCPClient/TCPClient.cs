@@ -25,6 +25,8 @@ namespace TCPClient
         int hostProt;
         private Socket _clientSocket;
         private string timedMsg = string.Empty;
+        /// <summary>一个动态数组，用于缓存收到但未来得及处理的数据（可以称呼其为“数据处理缓冲区”）</summary>
+        private List<byte> processBuffer = new List<byte>();
         /// <summary>
         /// 接收消息的线程
         /// </summary>
@@ -91,12 +93,12 @@ namespace TCPClient
                 byte[] receiveBuffer = new byte[65536];
                 while (IsConnected)
                 {
-                    Thread.Sleep(150);
                     var dataLength = _clientSocket.Receive(receiveBuffer);
                     if (dataLength > 0)
                     {
-                        var receivedStr = DataProcessing.DecodeUsingSpecificCodecPattern(receiveBuffer, dataLength, Codec);
-                        PrintMsg($"收到来自服务端[{_clientSocket.RemoteEndPoint}]的消息：{receivedStr}");
+                        //将所有收到的数据放入“数据处理缓冲区”
+                        processBuffer.AddRange(receiveBuffer.Take(dataLength));
+                        ProcessData();
                     }
                 }
             }
@@ -112,6 +114,46 @@ namespace TCPClient
                 _clientSocket.Close();
                 IsConnected = false;
                 MessageBox.Show($"在从服务端接收消息的过程中出现异常：\n\t{ex.Message}\n调用堆栈：\n\t{ex.StackTrace}", ex.GetType().Name, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        /// <summary>
+        /// 处理数据
+        /// </summary>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="CodecException"></exception>
+        /// <exception cref="ArgumentException"></exception>
+        /// <exception cref="ArgumentNullException"></exception>
+        public void ProcessData()
+        {
+            string receivedStr;
+            switch (Codec)
+            {
+                case Codec.none:
+                    receivedStr = DataProcessing.DecodeUsingSpecificCodecPattern(processBuffer.ToArray(), processBuffer.Count, Codec);
+                    PrintMsg($"收到来自服务端[{_clientSocket.RemoteEndPoint}]的消息：{receivedStr}");
+                    //所有数据已经处理完，清空“数据处理缓冲区”
+                    processBuffer.Clear();
+                    break;
+                case Codec.lengthPacketHeader:
+                    while (true)
+                    {
+                        //如果待处理的数据还不够一个包头大小，直接退出处理逻辑
+                        if (processBuffer.Count < 4) return;
+
+                        //取包头信息
+                        var bodyLength = BitConverter.ToInt32(processBuffer.Take(4).ToArray(), 0);
+                        if (bodyLength < 0 || bodyLength > 65534) throw new ArgumentOutOfRangeException(nameof(processBuffer), "包头所表征的包体字节数长度值无效（长度为负数或者超过接收缓冲区的最大长度 64KB）");
+                        //如果待处理的数据还不够一个完整的数据包大小，直接退出处理逻辑
+                        var validLength = 4 + bodyLength;
+                        if (processBuffer.Count < validLength) return;
+
+                        //处理一个完整的数据包
+                        receivedStr = DataProcessing.DecodeUsingSpecificCodecPattern(processBuffer.Take(validLength).ToArray(), validLength, Codec);
+                        PrintMsg($"收到来自服务端[{_clientSocket.RemoteEndPoint}]的消息：{receivedStr}");
+                        //“数据处理缓冲区”移除已经处理完成的单个完整数据包数据
+                        processBuffer.RemoveRange(0, validLength);
+                    }
             }
         }
 
