@@ -2,9 +2,11 @@
 
 ## Windows 推荐环境
 
-* [Visual Studio 2022](https://visualstudio.microsoft.com/zh-hans/vs/) 17.7.3
-* [Microsoft .NET Framework](https://dotnet.microsoft.com/zh-cn/download/dotnet-framework) 4.8.09037
+* [Visual Studio 2022](https://visualstudio.microsoft.com/zh-hans/vs/) 17.7.3 及以上
+* [Microsoft .NET Framework](https://dotnet.microsoft.com/zh-cn/download/dotnet-framework) 4.8.09037 及以上
 * [「.NET 桌面开发」工作负荷](https://learn.microsoft.com/zh-cn/visualstudio/ide/create-csharp-winform-visual-studio?view=vs-2022)
+
+## 🏷️ [查看下载安装教程](./下载安装教程.md)
 
 ## Demo 使用
 
@@ -45,3 +47,4 @@
 3. ✅ 添加快捷消息：<br><div align="center"><img src="./images/10-AddQuickMsg.gif" alt="AddQuickMsg"/></div>
 4. ✅ 发送快捷消息：<br><div align="center"><img src="./images/11-SendQuickMsg.gif" alt="SendQuickMsg"/></div>
 5. ✅ 部分选项设置可根据自身习惯进行配置（Release [v 0.1.2](https://github.com/YMGogre/WinForms_TCP_Demo/releases/tag/0.1.2) 及以上）：<br><div align="center"><img src="./images/12-option.png" alt="Option"/></div>
+6. ✅ 定时连续发送消息：<br><div align="center"><img src="./images/13-SendMessagesPeriodically.gif" alt="SendMessagesPeriodically"/></div>
