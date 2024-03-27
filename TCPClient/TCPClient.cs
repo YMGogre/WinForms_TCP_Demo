@@ -186,6 +186,7 @@ namespace TCPClient
 
         private void ipAddrInputer_hostIP_Validating(object sender, CancelEventArgs e)
         {
+            hostIP = ipAddrInputer_hostIP.IPAddr;
             hostIPStr = ipAddrInputer_hostIP.IPAddrStr;
             Properties.Settings.Default.hostIP = hostIPStr;
             Properties.Settings.Default.Save();
@@ -281,6 +282,7 @@ namespace TCPClient
 
         private void comboBox_quickMsg_SelectionChangeCommitted(object sender, EventArgs e)
         {
+            if (comboBox_quickMsg.SelectedIndex < 0) return;
             //消息编辑栏显示当前所选择的快捷消息的消息内容
             this.Invoke(new Action(() => { richTextBox_msgEditBox.Text = quickMsgs[comboBox_quickMsg.SelectedIndex].Message; }));
         }
